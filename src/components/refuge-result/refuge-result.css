@@ -1,0 +1,17 @@
+refuge-result {
+  /* Component styles go here */
+}
+
+.refuge-result {
+  padding: 4px 0;
+  margin: 0;
+  color: var(--black);
+}
+
+.inactive {
+  color: var(--dark-grey);
+}
+
+.focused {
+  color: var(--med-red);
+}

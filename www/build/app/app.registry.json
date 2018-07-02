@@ -1,0 +1,40 @@
+{
+  "namespace": "App",
+  "fsNamespace": "app",
+  "loader": "../app.js",
+  "global": "app.global.js",
+  "core": "app.onlaozns.js",
+  "corePolyfilled": "app.sidvzhvv.js",
+  "components": {
+    "app-counter": {
+      "$": "eooqxhka"
+    },
+    "app-detail": {
+      "$": "nnn9cgjb"
+    },
+    "app-root": {
+      "$": "fyvv0vde"
+    },
+    "refuge-filter": {
+      "$": "fyvv0vde"
+    },
+    "refuge-header": {
+      "$": "s3ibjiwh"
+    },
+    "refuge-map": {
+      "$": "fyvv0vde"
+    },
+    "refuge-prediction": {
+      "$": "s3ibjiwh"
+    },
+    "refuge-predictions": {
+      "$": "fyvv0vde"
+    },
+    "refuge-result": {
+      "$": "fyvv0vde"
+    },
+    "refuge-results": {
+      "$": "fyvv0vde"
+    }
+  }
+}

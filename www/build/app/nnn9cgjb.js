@@ -1,0 +1,2 @@
+/*! Built with http://stenciljs.com */
+const{h:e}=window.App;class t{render(){return e("div",null,e("p",null,"Hello AppDetail!"))}static get is(){return"app-detail"}static get style(){return""}}export{t as AppDetail};

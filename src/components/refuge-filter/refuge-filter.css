@@ -1,0 +1,58 @@
+refuge-filter {
+  grid-row: 3;
+  grid-column: span 4;
+  width: 100%;
+  background: var(--blue-med);
+  transition: all 0.25s;
+  /* Component styles go here */
+}
+
+.refuge-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  padding: 8px 0;
+}
+
+.filter-icon {
+  display: inline;
+  color: var(--white);
+  align-self: center;
+}
+
+.inactive {
+  color: var(--med-grey);
+}
+
+.filter-label {
+  display: inline;
+  margin: 8px;
+  color: var(--white);
+}
+
+.clear-link {
+  display: inline;
+  margin: 8px;
+  color: var(--white);
+}
+
+.left {
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  text-align: right;
+  display: flex;
+  align-items: center;
+}
+
+.hidden {
+  height: 0;
+  padding: 0 0 0 0;
+  transition: all 0.25s;
+  overflow: hidden;
+}
