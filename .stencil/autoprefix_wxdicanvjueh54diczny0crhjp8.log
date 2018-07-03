@@ -1,0 +1,16 @@
+refuge-prediction {
+  display: block;
+  z-index: 100;
+  margin: 32px 0;
+  /* Component styles go here */
+}
+
+.icon {
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.marker {
+  background-image: url("assets/icons/marker-default.svg");
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="32px" viewBox="0 0 24 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>map-marker/focused</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M23.7677419,11.6682927 C23.3419355,5.30731707 18.1935484,0.312195122 12,0.312195122 C5.80645161,0.312195122 0.658064516,5.30731707 0.232258065,11.6682927 C0.0387096774,14.5170732 0.929032258,17.404878 2.7483871,19.8243902 L11.2645161,31.297561 C11.4580645,31.5317073 11.7290323,31.6878049 12.0387097,31.6878049 C12.3483871,31.6878049 12.6193548,31.5317073 12.8129032,31.297561 L21.3290323,19.8243902 C23.0709677,17.404878 23.9612903,14.5170732 23.7677419,11.6682927 Z M12,17.404878 C9.2516129,17.404878 7.04516129,15.1414634 7.04516129,12.3707317 C7.04516129,9.6 9.2516129,7.37560976 12,7.37560976 C14.7483871,7.37560976 16.9548387,9.63902439 16.9548387,12.4097561 C16.9548387,15.1804878 14.7483871,17.404878 12,17.404878 Z" id="path-1"></path>
+    </defs>
+    <g id="map-marker/focused" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons/place">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Shape" fill="#AAAAAA" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <g id="color" mask="url(#mask-2)" fill="#FF5850" fill-rule="evenodd">
+                <g id="colors/med-red">
+                    <rect id="Rectangle-5" x="0" y="0" width="24" height="32"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

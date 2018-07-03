@@ -1,0 +1,75 @@
+refuge-filter {
+  grid-row: 3;
+  grid-column: span 4;
+  width: 100%;
+  background: var(--blue-med);
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  /* Component styles go here */
+}
+
+.refuge-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  padding: 8px 0;
+}
+
+.filter-icon {
+  display: inline;
+  color: var(--white);
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.inactive {
+  color: var(--med-grey);
+}
+
+.filter-label {
+  display: inline;
+  margin: 8px;
+  color: var(--white);
+}
+
+.clear-link {
+  display: inline;
+  margin: 8px;
+  color: var(--white);
+}
+
+.left {
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.right {
+  text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.hidden {
+  height: 0;
+  padding: 0 0 0 0;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  overflow: hidden;
+}

@@ -1,2 +1,0 @@
-/*! Built with http://stenciljs.com */
-const{h:t}=window.App;class n{render(){return t("div",null,t("button",{onClick:()=>{this.changeCount(-10)}},"-10"),t("button",{onClick:()=>{this.changeCount(-1)}},"-1"),t("span",{class:"count"},this.count),t("button",{onClick:()=>{this.changeCount(1)}},"+1"),t("button",{onClick:()=>{this.changeCount(10)}},"+10"))}static get is(){return"app-counter"}static get properties(){return{changeCount:{type:"Any",attr:"change-count"},count:{type:Number,attr:"count"}}}static get style(){return""}}export{n as AppCounter};

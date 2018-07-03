@@ -5,9 +5,8 @@ refuge-predictions {
   max-height: 50vh;
   overflow: scroll;
   list-style-type: none;
-  padding: 0px 16px 0px 16px;
   margin: 0;
-  background: var(--light-grey);
+  background: var(--white);
   color: var(--blue-dark);
   box-shadow: var(--shadow);
   transition: height 0.25s;

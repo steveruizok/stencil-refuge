@@ -1,0 +1,19 @@
+refuge-prediction {
+  display: block;
+  z-index: 100;
+  margin: 0 0;
+  padding: 16px 24px 16px 16px;
+  /* Component styles go here */
+}
+
+.icon {
+  margin: 16px;
+  height: 24px;
+  width: 24px;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.marker {
+  background-image: url("assets/icons/marker-default.svg");
+}

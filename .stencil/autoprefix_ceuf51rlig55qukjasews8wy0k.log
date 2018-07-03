@@ -1,0 +1,14 @@
+refuge-prediction {
+  display: block;
+  z-index: 100;
+  margin: 0 0;
+  padding: 0 24px 16px 16px;
+  /* Component styles go here */
+}
+
+.marker {
+  height: 24px;
+  width: 18px;
+  -ms-flex-item-align: center;
+  align-self: center;
+}

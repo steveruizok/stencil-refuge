@@ -1,6 +1,22 @@
 refuge-prediction {
-  display: block;
-  z-index: 100;
-  margin: 32px 0;
+  height: 88px;
+  /* padding: 16px 24px 16px 16px; */
   /* Component styles go here */
+}
+
+.prediction-container {
+  display: flex;
+  align-content: center;
+  padding: 32px 24px 32px 16px;
+  border-bottom: 1px solid var(--light-grey);
+}
+
+.marker {
+  height: 24px;
+  width: 18px;
+}
+
+.prediction-content {
+  padding-left: 16px;
+  height: 100%;
 }

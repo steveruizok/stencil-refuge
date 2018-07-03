@@ -1,6 +1,7 @@
 import { Component, Prop, State } from "@stencil/core";
 import { Store, Action } from "@stencil/redux";
 import { setPredictions } from "../actions/app";
+import classnames from "classnames";
 
 @Component({
   tag: "refuge-header",
@@ -16,6 +17,7 @@ export class RefugeHeader {
 
   setPredictions: Action;
 
+  hasText;
   input;
   service;
   autocomplete;
@@ -50,6 +52,8 @@ export class RefugeHeader {
       this.clearPredictions();
       return;
     }
+
+    this.hasText = true;
 
     this.autocomplete.getPlacePredictions(
       {
@@ -93,28 +97,55 @@ export class RefugeHeader {
     this.clearPredictions();
   };
 
+  handleRightClick = () => {
+    if (this.input.value.length > 0) {
+      this.input.value = null;
+      this.clearPredictions();
+    } else {
+      this.searchByLocation();
+    }
+  };
+
   // Rendering Methods
 
   render() {
+    let containerClasses, rightIcon, rightIconClasses;
+
+    if (this.input && this.input.value.length > 0) {
+      rightIcon = "close";
+    } else {
+      rightIcon = "my_location";
+    }
+
+    rightIconClasses = classnames({
+      "header-icon": true,
+      "right-icon": true,
+      "material-icons": true,
+      location: rightIcon == "my_location"
+    });
+
+    containerClasses = classnames({
+      "search-container": true,
+      "bottom-border": this.hasText
+    });
+
     return (
-      <div class="search-container">
+      <div class={containerClasses}>
         <input
           class="search-input"
+          placeholder="Search..."
           ref={el => {
             this.input = el;
           }}
-          onBlur={() => {
-            setTimeout(this.clearPredictions, 150);
-          }}
+          // onBlur={() => {
+          //   setTimeout(this.clearPredictions, 150);
+          // }}
           onInput={this.getPredictions}
           onFocus={this.getPredictions}
         />
-        <span class="header-icon search-icon material-icons">search</span>
-        <span
-          class="header-icon location-icon material-icons"
-          onClick={this.searchByLocation}
-        >
-          my_location
+        <span class="header-icon left-icon material-icons">search</span>
+        <span class={rightIconClasses} onClick={this.handleRightClick}>
+          {rightIcon}
         </span>
       </div>
     );

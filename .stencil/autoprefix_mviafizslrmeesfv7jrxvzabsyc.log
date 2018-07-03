@@ -1,0 +1,20 @@
+refuge-prediction {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 88px;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  /* padding: 16px 24px 16px 16px; */
+  /* Component styles go here */
+}
+
+.marker {
+  grid-column: 1;
+  height: 24px;
+  width: 18px;
+}
+
+.prediction-content {
+  grid-column: 2;
+}

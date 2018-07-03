@@ -9,8 +9,11 @@ export class RefugePrediction {
 
   render() {
     return (
-      <li class="refuge-prediction">
-        <slot />
+      <li class="prediction-container">
+        <img class="icon marker" src="assets/icons/marker-default.svg" />
+        <span class="prediction-content">
+          <slot />
+        </span>
       </li>
     );
   }

@@ -1,0 +1,15 @@
+refuge-prediction {
+  height: 88px;
+  /* padding: 16px 24px 16px 16px; */
+  /* Component styles go here */
+}
+
+.marker {
+  grid-column: 1;
+  height: 24px;
+  width: 18px;
+}
+
+.prediction-content {
+  grid-column: 2;
+}

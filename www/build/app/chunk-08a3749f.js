@@ -1,2 +1,69 @@
 /*! Built with http://stenciljs.com */
-const{h:E}=window.App;var S;!function(E){E.NULL="NULL",E.ERROR="ERROR",E.SET_GOOGLE_SERVICES="SET_GOOGLE_SERVICES",E.SET_RESULTS_FILTER="SET_RESULTS_FILTER",E.SET_RESULTS="SET_RESULTS",E.SET_MARKERS="SET_MARKERS",E.SET_PREDICTIONS="SET_PREDICTIONS",E.SET_USER_LOCATION="SET_USER_LOCATION",E.SET_FOCUSED_RESULT="SET_FOCUSED_RESULT",E.SET_SELECTED_RESULT="SET_SELECTED_RESULT"}(S||(S={}));var n=function(E,S,n,T){return new(n||(n=Promise))(function(o,t){function i(E){try{R(T.next(E))}catch(E){t(E)}}function _(E){try{R(T.throw(E))}catch(E){t(E)}}function R(E){E.done?o(E.value):new n(function(S){S(E.value)}).then(i,_)}R((T=T.apply(E,S||[])).next())})};const T=E=>(T,o)=>n(void 0,void 0,void 0,function*(){return T({type:S.SET_RESULTS_FILTER,change:E})}),o=(E=[])=>(T,o)=>n(void 0,void 0,void 0,function*(){return T({type:S.SET_RESULTS,results:E})}),t=(E=[])=>(T,o)=>n(void 0,void 0,void 0,function*(){return T({type:S.SET_MARKERS,markers:E})}),i=(E=[])=>(T,o)=>n(void 0,void 0,void 0,function*(){return T({type:S.SET_PREDICTIONS,predictions:E})}),_=E=>(T,o)=>n(void 0,void 0,void 0,function*(){return T({type:S.SET_USER_LOCATION,location:E})}),R=E=>(T,o)=>n(void 0,void 0,void 0,function*(){return T({type:S.SET_FOCUSED_RESULT,focused:E})}),e=E=>(T,o)=>n(void 0,void 0,void 0,function*(){return T({type:S.SET_SELECTED_RESULT,selected:E})});export{i as a,S as b,o as c,t as d,_ as e,R as f,e as g,T as h};
+const { h } = window.App;
+
+var TypeKeys;
+(function (TypeKeys) {
+    TypeKeys["NULL"] = "NULL";
+    TypeKeys["ERROR"] = "ERROR";
+    TypeKeys["SET_GOOGLE_SERVICES"] = "SET_GOOGLE_SERVICES";
+    TypeKeys["SET_RESULTS_FILTER"] = "SET_RESULTS_FILTER";
+    TypeKeys["SET_RESULTS"] = "SET_RESULTS";
+    TypeKeys["SET_MARKERS"] = "SET_MARKERS";
+    TypeKeys["SET_PREDICTIONS"] = "SET_PREDICTIONS";
+    TypeKeys["SET_USER_LOCATION"] = "SET_USER_LOCATION";
+    TypeKeys["SET_FOCUSED_RESULT"] = "SET_FOCUSED_RESULT";
+    TypeKeys["SET_SELECTED_RESULT"] = "SET_SELECTED_RESULT";
+})(TypeKeys || (TypeKeys = {}));
+
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const setResultsFilter = (change) => (dispatch, _getState) => __awaiter(undefined, void 0, void 0, function* () {
+    return dispatch({
+        type: TypeKeys.SET_RESULTS_FILTER,
+        change: change
+    });
+});
+const setResults = (results = []) => (dispatch, _getState) => __awaiter(undefined, void 0, void 0, function* () {
+    return dispatch({
+        type: TypeKeys.SET_RESULTS,
+        results: results
+    });
+});
+const setMarkers = (markers = []) => (dispatch, _getState) => __awaiter(undefined, void 0, void 0, function* () {
+    return dispatch({
+        type: TypeKeys.SET_MARKERS,
+        markers: markers
+    });
+});
+const setPredictions = (predictions = []) => (dispatch, _getState) => __awaiter(undefined, void 0, void 0, function* () {
+    return dispatch({
+        type: TypeKeys.SET_PREDICTIONS,
+        predictions: predictions
+    });
+});
+const setUserLocation = (location) => (dispatch, _getState) => __awaiter(undefined, void 0, void 0, function* () {
+    return dispatch({
+        type: TypeKeys.SET_USER_LOCATION,
+        location: location
+    });
+});
+const setFocusedResult = (focused) => (dispatch, _getState) => __awaiter(undefined, void 0, void 0, function* () {
+    return dispatch({
+        type: TypeKeys.SET_FOCUSED_RESULT,
+        focused: focused
+    });
+});
+const setSelectedResult = (selected) => (dispatch, _getState) => __awaiter(undefined, void 0, void 0, function* () {
+    return dispatch({
+        type: TypeKeys.SET_SELECTED_RESULT,
+        selected: selected
+    });
+});
+
+export { TypeKeys as a, setResults as b, setMarkers as c, setUserLocation as d, setFocusedResult as e, setSelectedResult as f, setResultsFilter as g, setPredictions as h };
