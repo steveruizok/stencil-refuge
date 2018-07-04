@@ -1,6 +1,12 @@
 import { Component, Prop, State } from "@stencil/core";
 import { Store, Action } from "@stencil/redux";
-import { setPredictions } from "../actions/app";
+import {
+  setPredictions,
+  setResults,
+  setMarkers,
+  setLoading,
+  resetAll
+} from "../actions/app";
 import classnames from "classnames";
 
 @Component({
@@ -11,11 +17,16 @@ export class RefugeHeader {
   @Prop({ context: "store" })
   store: Store;
   @Prop() searchBar: boolean = true;
-  @Prop() backLink: boolean = false;
   @Prop() handleSearch: Function;
-  @State() predictions: Array<any>;
+  @State() predictions: Array<any> = [];
+  @State() markers: any;
+  @State() loading: any;
 
   setPredictions: Action;
+  setResults: Action;
+  setMarkers: Action;
+  setLoading: Action;
+  resetAll: Action;
 
   hasText;
   input;
@@ -27,15 +38,19 @@ export class RefugeHeader {
 
   componentDidLoad() {
     this.store.mapDispatchToProps(this, {
-      setPredictions
+      setPredictions,
+      setResults,
+      setMarkers,
+      setLoading,
+      resetAll
     });
 
     this.store.mapStateToProps(this, state => {
       const {
-        app: { service, map, predictions }
+        app: { service, map, predictions, markers, loading }
       } = state;
 
-      return { service, map, predictions };
+      return { service, map, predictions, markers, loading };
     });
 
     this.autocomplete = new google.maps.places.AutocompleteService();
@@ -47,13 +62,12 @@ export class RefugeHeader {
 
   getPredictions = event => {
     let value = event.target.value;
+    this.hasText = this.input.value.length > 0;
 
     if (value === undefined || value.length === 0) {
       this.clearPredictions();
       return;
     }
-
-    this.hasText = true;
 
     this.autocomplete.getPlacePredictions(
       {
@@ -92,16 +106,22 @@ export class RefugeHeader {
   };
 
   searchByLocation = () => {
-    this.input.value = "My location";
+    this.input.value = "My Location";
     this.handleSearch();
     this.clearPredictions();
   };
 
   handleRightClick = () => {
-    if (this.input.value.length > 0) {
+    if (document.hasFocus()) {
+      // clear input content
       this.input.value = null;
       this.clearPredictions();
+    } else if (this.input.value.length > 0) {
+      // clear map
+      this.input.value = null;
+      this.resetAll();
     } else {
+      // search by location
       this.searchByLocation();
     }
   };
@@ -109,9 +129,15 @@ export class RefugeHeader {
   // Rendering Methods
 
   render() {
-    let containerClasses, rightIcon, rightIconClasses;
+    let containerClasses, rightIcon, leftIcon, rightIconClasses;
 
-    if (this.input && this.input.value.length > 0) {
+    if (this.loading) {
+      leftIcon = <refuge-spinner class="small" />;
+    } else {
+      leftIcon = "search";
+    }
+
+    if ((this.input && this.input.value.length > 0) || this.loading) {
       rightIcon = "close";
     } else {
       rightIcon = "my_location";
@@ -126,12 +152,13 @@ export class RefugeHeader {
 
     containerClasses = classnames({
       "search-container": true,
-      "bottom-border": this.hasText
+      "bottom-border": this.predictions.length === 0
     });
 
     return (
       <div class={containerClasses}>
         <input
+          id="search-input"
           class="search-input"
           placeholder="Search..."
           ref={el => {
@@ -141,9 +168,12 @@ export class RefugeHeader {
           //   setTimeout(this.clearPredictions, 150);
           // }}
           onInput={this.getPredictions}
-          onFocus={this.getPredictions}
+          onFocus={event => {
+            this.input.select();
+            this.getPredictions(event);
+          }}
         />
-        <span class="header-icon left-icon material-icons">search</span>
+        <span class="header-icon left-icon material-icons">{leftIcon}</span>
         <span class={rightIconClasses} onClick={this.handleRightClick}>
           {rightIcon}
         </span>

@@ -1,0 +1,24 @@
+/*! Built with http://stenciljs.com */
+App.loadBundle('/**:bundle-id:**/', ['exports'], function (exports) {
+    var h = window.App.h;
+    var AppDetail = /** @class */ (function () {
+        function AppDetail() {
+        }
+        AppDetail.prototype.render = function () {
+            return (h("div", null, h("p", null, "Hello AppDetail!")));
+        };
+        Object.defineProperty(AppDetail, "is", {
+            get: function () { return "app-detail"; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AppDetail, "style", {
+            get: function () { return "/**style-placeholder:app-detail:**/"; },
+            enumerable: true,
+            configurable: true
+        });
+        return AppDetail;
+    }());
+    exports.AppDetail = AppDetail;
+    Object.defineProperty(exports, '__esModule', { value: true });
+});

@@ -1,4 +1,4 @@
-import { Component, Prop, State } from "@stencil/core";
+import { Component, Prop, State, Element } from "@stencil/core";
 import { Store } from "@stencil/redux";
 
 @Component({
@@ -9,6 +9,7 @@ export class RefugePredictions {
   @Prop({ context: "store" })
   store: Store;
   @State() predictions: Array<any> = [];
+  @Element() elem: HTMLElement;
 
   componentDidLoad() {
     this.store.mapStateToProps(this, state => {
@@ -21,6 +22,8 @@ export class RefugePredictions {
   }
 
   render() {
+    this.elem.classList.toggle("open", this.predictions.length > 0);
+
     return this.predictions;
   }
 }

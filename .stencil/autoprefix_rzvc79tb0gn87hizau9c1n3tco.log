@@ -1,0 +1,25 @@
+refuge-results {
+  grid-row: 5;
+  overflow: scroll;
+  position: relative;
+  width: 100%;
+  background: var(--white);
+  -webkit-box-shadow: var(--shadow);
+  box-shadow: var(--shadow);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition: height 0.25s;
+  transition: height 0.25s;
+}
+
+.hidden {
+  -webkit-transition: height 0.25s;
+  transition: height 0.25s;
+  height: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

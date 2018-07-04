@@ -9,18 +9,30 @@
 */
 
 :root {
-  --blue-med: #0073d9;
-  --blue-light: #38cccc;
-  --blue-dark: #001f3f;
+  --blue-med: #5090ff;
+  --blue-deep: #4e71ff;
+  --blue-dark: #414d9b;
   --white: #ffffff;
   --pale-grey: #f5f5f5;
   --light-grey: #eeeeee;
   --med-grey: #dddddd;
   --dark-grey: #aaaaaa;
-  --black: #111111;
-  --med-red: #ea4335;
+  --black: #3333333;
+  --med-red: #ff5850;
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
-  --text-body: 16px "Source Sans Pro", sans-serif;
+  --text-body: 16px "Avenir", sans-serif;
+}
+
+.label {
+  width: 130px;
+  height: 19px;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  color: #ffffff;
 }
 
 *,
@@ -43,6 +55,7 @@ body {
   margin: 0px;
   padding: 0px;
   font: var(--text-body);
+  color: var(--black);
 }
 
 button {

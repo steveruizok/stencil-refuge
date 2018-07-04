@@ -17,21 +17,23 @@ export class RefugeResult {
   };
 
   render() {
-    let resultClass = classNames({
-      "refuge-result": true,
-      focused: this.focused
-    });
+    let markerImage = this.focused
+      ? "marker-focused.svg"
+      : "marker-default.svg";
 
-    return (
-      <li class={resultClass}>
-        <h2>{this.result.name}</h2>
-        <p>{this.result.street}</p>
-        <p>
-          <span class={this.getVisible("accessible")}>accessible</span>
-          <span class={this.getVisible("unisex")}>wc</span>
-          <span class={this.getVisible("changing_table")}>child_care</span>
-        </p>
-      </li>
-    );
+    return [
+      <div class="left">
+        <img class="icon marker" src={"assets/icons/" + markerImage} />
+      </div>,
+      <div class="center">
+        <p class="result-name">{this.result.name}</p>
+        <p class="result-address">{this.result.street}</p>
+      </div>,
+      <div class="right">
+        <span class={this.getVisible("accessible")}>accessible</span>
+        <span class={this.getVisible("unisex")}>wc</span>
+        <span class={this.getVisible("changing_table")}>child_care</span>
+      </div>
+    ];
   }
 }

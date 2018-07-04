@@ -1,0 +1,71 @@
+refuge-filter {
+  grid-row: 3;
+  grid-column: span 4;
+  width: 100%;
+  background: var(--blue-med);
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  /* Component styles go here */
+}
+
+.refuge-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+  padding: 12px 0;
+}
+
+.filter-icon {
+  cursor: pointer;
+  display: inline;
+  color: var(--white);
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.inactive {
+  color: var(--dark-blue);
+}
+
+.filter {
+  display: inline;
+  color: var(--white);
+}
+
+.left {
+  margin-left: 16px;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.right {
+  margin-right: 24px;
+  text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.hidden {
+  height: 0;
+  padding: 0 0 0 0;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  overflow: hidden;
+}

@@ -6,7 +6,8 @@ import {
   setMarkers,
   setUserLocation,
   setFocusedResult,
-  setSelectedResult
+  setSelectedResult,
+  setLoading
 } from "../actions/app";
 // import classNames from "classnames";
 
@@ -40,6 +41,8 @@ export class AppRoot {
   setUserLocation: Action;
   @State() location: any;
 
+  setLoading: Action;
+
   userLocationMarker: any;
 
   componentWillLoad() {
@@ -57,7 +60,8 @@ export class AppRoot {
       setMarkers,
       setUserLocation,
       setFocusedResult,
-      setSelectedResult
+      setSelectedResult,
+      setLoading
     });
   }
 
@@ -71,14 +75,14 @@ export class AppRoot {
     this.service = new google.maps.places.PlacesService(this.map);
 
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(this.setUserPosition);
+      navigator.geolocation.getCurrentPosition(this.setUserPosition, () => {
+        this.setLoading(false);
+      });
       // navigator.geolocation.watchPosition(this.updateUserPosition);
     }
   }
   // Update the user location on the map
   setUserPosition = position => {
-    this.loading = true;
-
     this.setUserLocation(
       new google.maps.LatLng(
         position.coords.latitude,
@@ -87,7 +91,7 @@ export class AppRoot {
     );
 
     if (this.userLocationMarker === null) {
-      this.loading = false;
+      this.setLoading(false);
       return;
     }
 
@@ -106,18 +110,22 @@ export class AppRoot {
     this.userLocationMarker.icon.rotation = position.heading;
     this.userLocationMarker.position = this.location;
     this.map.panTo(this.location);
-
-    this.loading = false;
+    this.setLoading(false);
 
     // testing
-    this.searchByUserLocation();
+    // this.searchByUserLocation();
   };
 
   // Make a search using the user location
   searchByUserLocation = () => {
-    if (this.location) {
-      this.getRefugeRestroomResults(this.location);
+    if (!this.location) {
+      return;
     }
+
+    this.getRefugeRestroomResults(this.location);
+
+    let input = document.getElementById("search-input") as HTMLInputElement;
+    input.value = "My Location";
   };
 
   // Get geography from an autocomplete prediction and search
@@ -127,7 +135,6 @@ export class AppRoot {
       return;
     }
 
-    this.loading = true;
     this.service.getDetails(
       {
         placeId: prediction.place_id
@@ -142,6 +149,8 @@ export class AppRoot {
   getRefugeRestroomResults = (latlng: any) => {
     this.clearMarkers();
     this.setResults([]);
+
+    this.setLoading(true);
 
     // this.map.panTo(latlng);
 
@@ -202,6 +211,7 @@ export class AppRoot {
     });
 
     this.map.fitBounds(bounds);
+    this.setLoading(false);
   };
 
   // Update which markers are visible
@@ -236,21 +246,12 @@ export class AppRoot {
     this.markers.forEach(function(marker) {
       marker.setMap(null);
     });
+    this.setFocusedResult(undefined);
+    this.setLoading(false);
   };
 
   render() {
     this.updateMarkers();
-
-    // let overlayClasses = classNames({
-    //   "location-container": true,
-    //   hidden: this.results.length > 0
-    // });
-
-    // let buttonClasses = classNames({
-    //   cta: true,
-    //   "location-search": true,
-    //   hidden: !("geolocation" in navigator)
-    // });
 
     return [
       <refuge-header handleSearch={this.searchByPrediction} />,

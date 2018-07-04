@@ -1,0 +1,22 @@
+refuge-predictions {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  max-height: 50vh;
+  overflow: scroll;
+  list-style-type: none;
+  margin: 0;
+  background: var(--white);
+  color: var(--blue-dark);
+  border-bottom: 1px solid var(--light-grey);
+  -webkit-box-shadow: var(--shadow);
+  box-shadow: var(--shadow);
+  -webkit-transition: height 0.25s;
+  transition: height 0.25s;
+}
+
+.open {
+  -webkit-transition: height 0.25s;
+  transition: height 0.25s;
+  border-bottom: none;
+}

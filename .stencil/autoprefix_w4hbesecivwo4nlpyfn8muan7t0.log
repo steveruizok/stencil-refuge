@@ -1,0 +1,61 @@
+refuge-result {
+  height: 88px;
+  /* padding: 16px 24px 16px 16px; */
+  /* Component styles go here */
+}
+
+.result-container {
+  display: grid;
+  grid-template-columns: 48px auto 120px;
+  padding: 16px 0;
+  /* border-bottom: 1px solid var(--light-grey); */
+}
+/* 
+.result-container::after {
+  content: "";
+  position: absolute;
+  width: auto;
+  height: 1px;
+  left: 48px;
+  right: 24px;
+  background: var(--light-grey);
+  bottom: 0px;
+} */
+
+.result-name {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.result-address {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  color: var(--dark-grey);
+}
+
+.marker {
+  height: 24px;
+  width: 18px;
+}
+
+.result-content {
+  height: 100%;
+}
+
+.left {
+  grid-column: 1;
+  text-align: center;
+}
+
+.center {
+  grid-column: 2;
+  text-align: left;
+}
+
+.right {
+  grid-column: 3;
+}

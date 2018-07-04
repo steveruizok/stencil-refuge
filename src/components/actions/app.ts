@@ -36,6 +36,13 @@ export interface SetSelectedResultAction {
   type: TypeKeys.SET_SELECTED_RESULT;
   selected: any;
 }
+export interface SetLoadingAction {
+  type: TypeKeys.SET_LOADING;
+  loading: boolean;
+}
+export interface ResetAllAction {
+  type: TypeKeys.RESET_ALL;
+}
 
 export const setGoogleServices = (service: any, map: any) => async (
   dispatch,
@@ -115,5 +122,18 @@ export const setSelectedResult = (selected: any) => async (
   return dispatch({
     type: TypeKeys.SET_SELECTED_RESULT,
     selected: selected
+  });
+};
+
+export const setLoading = (loading: boolean) => async (dispatch, _getState) => {
+  return dispatch({
+    type: TypeKeys.SET_LOADING,
+    loading: loading
+  });
+};
+
+export const resetAll = () => async (dispatch, _getState) => {
+  return dispatch({
+    type: TypeKeys.RESET_ALL
   });
 };

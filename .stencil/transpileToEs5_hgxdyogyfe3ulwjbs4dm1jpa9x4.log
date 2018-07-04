@@ -1,0 +1,200 @@
+/*! Built with http://stenciljs.com */
+App.loadBundle('/**:bundle-id:**/', ['exports', './chunk-c1620ff6.js'], function (exports, __chunk_1) {
+    var h = window.App.h;
+    var RefugeHeader = /** @class */ (function () {
+        function RefugeHeader() {
+            var _this = this;
+            this.searchBar = true;
+            this.clearPredictions = function () {
+                _this.setPredictions([]);
+            };
+            this.getPredictions = function (event) {
+                var value = event.target.value;
+                if (value === undefined || value.length === 0) {
+                    _this.clearPredictions();
+                    return;
+                }
+                _this.hasText = true;
+                _this.autocomplete.getPlacePredictions({
+                    input: value
+                }, function (predictions) {
+                    if (predictions === null || predictions.length === 0) {
+                        _this.clearPredictions();
+                        return;
+                    }
+                    var newPredictions = predictions.map(function (p) {
+                        return (h("refuge-prediction", { onClick: function () {
+                                _this.searchByPrediction(p);
+                            } }, p.description));
+                    });
+                    _this.setPredictions(newPredictions);
+                });
+            };
+            // handle search
+            this.searchByPrediction = function (prediction) {
+                _this.input.value = prediction.structured_formatting.main_text;
+                _this.handleSearch(prediction);
+                _this.clearPredictions();
+            };
+            this.searchByLocation = function () {
+                _this.input.value = "My Location";
+                _this.handleSearch();
+                _this.clearPredictions();
+            };
+            this.handleRightClick = function () {
+                if (_this.input.value.length > 0) {
+                    _this.input.value = null;
+                    _this.clearPredictions();
+                    _this.setResults([]);
+                    _this.markers.forEach(function (marker) {
+                        marker.setMap(null);
+                    });
+                }
+                else {
+                    _this.searchByLocation();
+                }
+            };
+        }
+        RefugeHeader.prototype.componentWillLoad = function () { };
+        RefugeHeader.prototype.componentDidLoad = function () {
+            this.store.mapDispatchToProps(this, {
+                setPredictions: __chunk_1.setPredictions,
+                setResults: __chunk_1.setResults,
+                setMarkers: __chunk_1.setMarkers
+            });
+            this.store.mapStateToProps(this, function (state) {
+                var _a = state.app, service = _a.service, map = _a.map, predictions = _a.predictions, markers = _a.markers, loading = _a.loading;
+                return { service: service, map: map, predictions: predictions, markers: markers, loading: loading };
+            });
+            this.autocomplete = new google.maps.places.AutocompleteService();
+        };
+        // Rendering Methods
+        RefugeHeader.prototype.render = function () {
+            var _this = this;
+            var containerClasses, rightIcon, leftIcon, rightIconClasses;
+            if (this.loading) {
+                leftIcon = h("refuge-spinner", { class: "small" });
+            }
+            else {
+                leftIcon = "search";
+            }
+            if ((this.input && this.input.value.length > 0) || this.loading) {
+                rightIcon = "close";
+            }
+            else {
+                rightIcon = "my_location";
+            }
+            rightIconClasses = __chunk_1.classnames({
+                "header-icon": true,
+                "right-icon": true,
+                "material-icons": true,
+                location: rightIcon == "my_location"
+            });
+            containerClasses = __chunk_1.classnames({
+                "search-container": true,
+                "bottom-border": this.hasText
+            });
+            return (h("div", { class: containerClasses }, h("input", { id: "search-input", class: "search-input", placeholder: "Search...", ref: function (el) {
+                    _this.input = el;
+                },
+                // onBlur={() => {
+                //   setTimeout(this.clearPredictions, 150);
+                // }}
+                onInput: this.getPredictions, onFocus: function (event) {
+                    _this.input.select();
+                    _this.getPredictions(event);
+                } }), h("span", { class: "header-icon left-icon material-icons" }, leftIcon), h("span", { class: rightIconClasses, onClick: this.handleRightClick }, rightIcon)));
+        };
+        Object.defineProperty(RefugeHeader, "is", {
+            get: function () { return "refuge-header"; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(RefugeHeader, "properties", {
+            get: function () {
+                return {
+                    "handleSearch": {
+                        "type": "Any",
+                        "attr": "handle-search"
+                    },
+                    "loading": {
+                        "state": true
+                    },
+                    "markers": {
+                        "state": true
+                    },
+                    "predictions": {
+                        "state": true
+                    },
+                    "searchBar": {
+                        "type": Boolean,
+                        "attr": "search-bar"
+                    },
+                    "store": {
+                        "context": "store"
+                    }
+                };
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(RefugeHeader, "style", {
+            get: function () { return "/**style-placeholder:refuge-header:**/"; },
+            enumerable: true,
+            configurable: true
+        });
+        return RefugeHeader;
+    }());
+    var RefugePrediction = /** @class */ (function () {
+        function RefugePrediction() {
+        }
+        RefugePrediction.prototype.render = function () {
+            return (h("li", { class: "prediction-container" }, h("img", { class: "icon marker", src: "assets/icons/marker-default.svg" }), h("span", { class: "prediction-content" }, h("slot", null))));
+        };
+        Object.defineProperty(RefugePrediction, "is", {
+            get: function () { return "refuge-prediction"; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(RefugePrediction, "properties", {
+            get: function () {
+                return {
+                    "item": {
+                        "type": "Any",
+                        "attr": "item"
+                    }
+                };
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(RefugePrediction, "style", {
+            get: function () { return "/**style-placeholder:refuge-prediction:**/"; },
+            enumerable: true,
+            configurable: true
+        });
+        return RefugePrediction;
+    }());
+    var RefugeSpinner = /** @class */ (function () {
+        function RefugeSpinner() {
+        }
+        RefugeSpinner.prototype.render = function () {
+            return (h("div", { class: "sk-circle" }, h("div", { class: "sk-circle1 sk-child" }), h("div", { class: "sk-circle2 sk-child" }), h("div", { class: "sk-circle3 sk-child" }), h("div", { class: "sk-circle4 sk-child" }), h("div", { class: "sk-circle5 sk-child" }), h("div", { class: "sk-circle6 sk-child" }), h("div", { class: "sk-circle7 sk-child" }), h("div", { class: "sk-circle8 sk-child" }), h("div", { class: "sk-circle9 sk-child" }), h("div", { class: "sk-circle10 sk-child" }), h("div", { class: "sk-circle11 sk-child" }), h("div", { class: "sk-circle12 sk-child" })));
+        };
+        Object.defineProperty(RefugeSpinner, "is", {
+            get: function () { return "refuge-spinner"; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(RefugeSpinner, "style", {
+            get: function () { return "/**style-placeholder:refuge-spinner:**/"; },
+            enumerable: true,
+            configurable: true
+        });
+        return RefugeSpinner;
+    }());
+    exports.RefugeHeader = RefugeHeader;
+    exports.RefugePrediction = RefugePrediction;
+    exports.RefugeSpinner = RefugeSpinner;
+    Object.defineProperty(exports, '__esModule', { value: true });
+});

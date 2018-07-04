@@ -1,0 +1,47 @@
+refuge-result {
+  height: 88px;
+  /* padding: 16px 24px 16px 16px; */
+  /* Component styles go here */
+}
+
+.result-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  padding: 32px 16px 32px 16px;
+  /* border-bottom: 1px solid var(--light-grey); */
+}
+
+.result-container::after {
+  content: "";
+  position: absolute;
+  width: auto;
+  height: 1px;
+  left: 48px;
+  right: 24px;
+  background: var(--light-grey);
+  bottom: 0px;
+}
+
+.result-name p {
+  padding: none;
+  margin: none;
+}
+
+.result-address p {
+  padding: none;
+  margin: none;
+}
+
+.marker {
+  height: 24px;
+  width: 18px;
+}
+
+.result-content {
+  padding-left: 16px;
+  height: 100%;
+}

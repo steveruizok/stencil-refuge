@@ -5,14 +5,16 @@ refuge-predictions {
   max-height: 50vh;
   overflow: scroll;
   list-style-type: none;
-  margin: 0;
-  background: var(--white);
-  color: var(--blue-dark);
-  box-shadow: var(--shadow);
+  margin: none;
+  background: none;
+  border-bottom: none;
+  box-shadow: none;
   transition: height 0.25s;
 }
 
-.hidden {
-  height: 0;
+.open {
   transition: height 0.25s;
+  background: var(--white);
+  border-bottom: 1px solid var(--light-grey);
+  box-shadow: var(--shadow);
 }

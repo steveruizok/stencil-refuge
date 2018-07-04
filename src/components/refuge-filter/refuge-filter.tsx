@@ -19,6 +19,8 @@ export class RefugeFilter {
   setResults: Action;
   setMarkers: Action;
 
+  results: any;
+
   componentWillLoad() {
     this.store.mapDispatchToProps(this, {
       setResultsFilter,
@@ -28,10 +30,10 @@ export class RefugeFilter {
 
     this.store.mapStateToProps(this, state => {
       const {
-        app: { filter, markers }
+        app: { filter, markers, results }
       } = state;
 
-      return { filter, markers };
+      return { filter, markers, results };
     });
   }
 
@@ -61,13 +63,22 @@ export class RefugeFilter {
       hidden: this.markers.length <= 0
     });
 
+    let results = "";
+
+    if (this.markers.length > 0) {
+      results = `(${this.markers.length})`;
+    }
+
     return (
       <div class={classes}>
         <div class="left">
-          <h5 class="filter-label">Filter:</h5>
+          <span class="filter label">Restrooms {results}</span>
+        </div>
+        <div class="right">
           <span
             class={this.getActive(this.filter.accessible)}
-            onClick={() => {
+            onClick={e => {
+              e.preventDefault();
               this.setResultsFilter({ accessible: !this.filter.accessible });
             }}
           >
@@ -75,7 +86,8 @@ export class RefugeFilter {
           </span>
           <span
             class={this.getActive(this.filter.unisex)}
-            onClick={() => {
+            onClick={e => {
+              e.preventDefault();
               this.setResultsFilter({ unisex: !this.filter.unisex });
             }}
           >
@@ -83,7 +95,8 @@ export class RefugeFilter {
           </span>
           <span
             class={this.getActive(this.filter.changing_table)}
-            onClick={() => {
+            onClick={e => {
+              e.preventDefault();
               this.setResultsFilter({
                 changing_table: !this.filter.changing_table
               });
@@ -91,11 +104,6 @@ export class RefugeFilter {
           >
             child_care
           </span>
-        </div>
-        <div class="right">
-          <h5 class="clear-link" onClick={this.clearResults}>
-            Clear
-          </h5>
         </div>
       </div>
     );

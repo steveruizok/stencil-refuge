@@ -6,7 +6,9 @@ import {
   SetPredictionsAction,
   SetUserLocationAction,
   SetFocusedResultAction,
-  SetSelectedResultAction
+  SetSelectedResultAction,
+  SetLoadingAction,
+  ResetAllAction
 } from "./app";
 
 export interface NullAction {
@@ -22,6 +24,8 @@ export type ActionTypes =
   | SetUserLocationAction
   | SetFocusedResultAction
   | SetSelectedResultAction
+  | SetLoadingAction
+  | ResetAllAction
   | SetMarkersAction;
 
 export enum TypeKeys {
@@ -34,5 +38,7 @@ export enum TypeKeys {
   SET_PREDICTIONS = "SET_PREDICTIONS",
   SET_USER_LOCATION = "SET_USER_LOCATION",
   SET_FOCUSED_RESULT = "SET_FOCUSED_RESULT",
-  SET_SELECTED_RESULT = "SET_SELECTED_RESULT"
+  SET_SELECTED_RESULT = "SET_SELECTED_RESULT",
+  SET_LOADING = "SET_LOADING",
+  RESET_ALL = "RESET_ALL"
 }

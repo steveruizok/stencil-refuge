@@ -9,11 +9,15 @@ refuge-header {
   grid-template-rows: 8px auto 8px;
   grid-template-columns: 8px 40px auto 40px 8px;
   text-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .bottom-border {
+  -webkit-box-shadow: inset 0px -1px 0px 0px var(--blue-dark);
   box-shadow: inset 0px -1px 0px 0px var(--blue-dark);
 }
 
@@ -25,6 +29,7 @@ refuge-header {
   outline: none;
   border-radius: 2px;
   padding: 0px 40px;
+  -webkit-transition: padding 0.5s;
   transition: padding 0.5s;
   font: var(--text-body);
 }
@@ -48,4 +53,29 @@ refuge-header {
 
 .location {
   color: var(--blue-med);
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.loading {
+  animation: rotating 2s linear infinite;
+  -webkit-animation: rotating 2s linear infinite;
 }

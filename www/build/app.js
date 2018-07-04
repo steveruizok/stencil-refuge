@@ -1,6 +1,6 @@
 /*!
  * Built with http://stenciljs.com
- * 2018-06-03T08:00:40
+ * 2018-06-04T23:04:46
  */
 (function(win, doc, namespace, fsNamespace, resourcesUrl, appCore, appCoreSsr, appCorePolyfilled, hydratedCssClass, components) {
 
@@ -135,4 +135,4 @@ function createComponentOnReadyPrototype(win, namespace, HTMLElementPrototype) {
 
   init(win, doc, namespace, fsNamespace, resourcesUrl, appCore, appCoreSsr, appCorePolyfilled, hydratedCssClass, components);
 
-  })(window, document, "App","app",0,"app.core.js","es5-build-disabled.js","hydrated",[["app-counter","app-counter",1,[["changeCount",1,0,"change-count",1],["count",1,0,1,4]]],["app-detail","app-detail",1],["app-root","app-root",1,[["filter",5],["focused",5],["loading",5],["location",5],["map",5],["markers",5],["results",5],["selected",5],["service",5],["store",3,0,0,0,"store"]]],["refuge-filter","app-root",1,[["filter",5],["markers",5],["store",3,0,0,0,"store"]]],["refuge-header","refuge-header",1,[["backLink",1,0,"back-link",3],["handleSearch",1],["predictions",5],["searchBar",1,0,"search-bar",3],["store",3,0,0,0,"store"]]],["refuge-map","app-root",1],["refuge-prediction","refuge-header",1,[["item",1,0,1,1]]],["refuge-predictions","app-root",1,[["predictions",5],["store",3,0,0,0,"store"]]],["refuge-result","app-root",1,[["focused",1,0,1,3],["result",1,0,1,1]]],["refuge-results","app-root",1,[["elm",7],["entries",5],["filter",5],["focused",5],["results",1,0,1,1],["store",3,0,0,0,"store"]]]],HTMLElement.prototype);
+  })(window, document, "App","app",0,"app.core.js","es5-build-disabled.js","hydrated",[["app-counter","app-counter",1,[["changeCount",1,0,"change-count",1],["count",1,0,1,4]]],["app-detail","app-detail",1],["app-root","app-root",1,[["filter",5],["focused",5],["loading",5],["location",5],["map",5],["markers",5],["results",5],["selected",5],["service",5],["store",3,0,0,0,"store"]]],["refuge-filter","app-root",1,[["filter",5],["markers",5],["store",3,0,0,0,"store"]]],["refuge-header","refuge-header",1,[["handleSearch",1],["loading",5],["markers",5],["predictions",5],["searchBar",1,0,"search-bar",3],["store",3,0,0,0,"store"]]],["refuge-map","app-root",1],["refuge-prediction","refuge-header",1,[["item",1,0,1,1]]],["refuge-predictions","app-root",1,[["elem",7],["predictions",5],["store",3,0,0,0,"store"]]],["refuge-result","app-root",1,[["focused",1,0,1,3],["result",1,0,1,1]]],["refuge-results","app-root",1,[["elm",7],["entries",5],["filter",5],["focused",5],["results",1,0,1,1],["store",3,0,0,0,"store"]]],["refuge-spinner","refuge-header",1]],HTMLElement.prototype);

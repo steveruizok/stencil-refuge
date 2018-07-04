@@ -166,7 +166,6 @@ declare global {
 
   namespace StencilComponents {
     interface RefugeHeader {
-      'backLink': boolean;
       'handleSearch': Function;
       'searchBar': boolean;
     }
@@ -191,7 +190,6 @@ declare global {
   }
   namespace JSXElements {
     export interface RefugeHeaderAttributes extends HTMLAttributes {
-      'backLink'?: boolean;
       'handleSearch'?: Function;
       'searchBar'?: boolean;
     }
@@ -361,6 +359,39 @@ declare global {
   namespace JSXElements {
     export interface RefugeResultsAttributes extends HTMLAttributes {
       'results'?: any;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface RefugeSpinner {
+
+    }
+  }
+
+  interface HTMLRefugeSpinnerElement extends StencilComponents.RefugeSpinner, HTMLStencilElement {}
+
+  var HTMLRefugeSpinnerElement: {
+    prototype: HTMLRefugeSpinnerElement;
+    new (): HTMLRefugeSpinnerElement;
+  };
+  interface HTMLElementTagNameMap {
+    'refuge-spinner': HTMLRefugeSpinnerElement;
+  }
+  interface ElementTagNameMap {
+    'refuge-spinner': HTMLRefugeSpinnerElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'refuge-spinner': JSXElements.RefugeSpinnerAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface RefugeSpinnerAttributes extends HTMLAttributes {
+
     }
   }
 }

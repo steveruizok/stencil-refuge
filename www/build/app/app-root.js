@@ -1,7 +1,7 @@
 /*! Built with http://stenciljs.com */
 const { h } = window.App;
 
-import { a as commonjsGlobal, b as unwrapExports, c as createCommonjsModule, d as TypeKeys, e as setResults, f as setMarkers, g as setUserLocation, h as setFocusedResult, i as setSelectedResult, j as setResultsFilter, k as classnames } from './chunk-c1561130.js';
+import { a as commonjsGlobal, b as unwrapExports, c as createCommonjsModule, d as TypeKeys, e as setResults, f as setMarkers, g as setUserLocation, h as setFocusedResult, i as setSelectedResult, j as setLoading, k as setResultsFilter, l as classnames } from './chunk-0ccbf0d2.js';
 
 var global$1 = (typeof global !== "undefined" ? global :
             typeof self !== "undefined" ? self :
@@ -611,7 +611,8 @@ const getInitialState = () => {
         predictions: [],
         location: undefined,
         focused: undefined,
-        selected: undefined
+        selected: undefined,
+        loading: false
     };
 };
 const app = (state = getInitialState(), action) => {
@@ -624,9 +625,15 @@ const app = (state = getInitialState(), action) => {
             return Object.assign({}, state, { filter: newFilter });
         }
         case TypeKeys.SET_RESULTS: {
+            if (!state.loading) {
+                return state;
+            }
             return Object.assign({}, state, { results: action.results });
         }
         case TypeKeys.SET_MARKERS: {
+            if (!state.loading) {
+                return state;
+            }
             return Object.assign({}, state, { markers: action.markers });
         }
         case TypeKeys.SET_PREDICTIONS: {
@@ -640,6 +647,15 @@ const app = (state = getInitialState(), action) => {
         }
         case TypeKeys.SET_SELECTED_RESULT: {
             return Object.assign({}, state, { selected: action.selected });
+        }
+        case TypeKeys.SET_LOADING: {
+            return Object.assign({}, state, { loading: action.loading });
+        }
+        case TypeKeys.RESET_ALL: {
+            state.markers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            return Object.assign({}, state, { loading: false, results: [], focused: undefined, selected: undefined, predictions: [] });
         }
     }
     return state;
@@ -656,10 +672,9 @@ class AppRoot {
         this.loading = true;
         // Update the user location on the map
         this.setUserPosition = position => {
-            this.loading = true;
             this.setUserLocation(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
             if (this.userLocationMarker === null) {
-                this.loading = false;
+                this.setLoading(false);
                 return;
             }
             this.userLocationMarker = new google.maps.Marker({
@@ -673,15 +688,18 @@ class AppRoot {
             this.userLocationMarker.icon.rotation = position.heading;
             this.userLocationMarker.position = this.location;
             this.map.panTo(this.location);
-            this.loading = false;
+            this.setLoading(false);
             // testing
-            this.searchByUserLocation();
+            // this.searchByUserLocation();
         };
         // Make a search using the user location
         this.searchByUserLocation = () => {
-            if (this.location) {
-                this.getRefugeRestroomResults(this.location);
+            if (!this.location) {
+                return;
             }
+            this.getRefugeRestroomResults(this.location);
+            let input = document.getElementById("search-input");
+            input.value = "My Location";
         };
         // Get geography from an autocomplete prediction and search
         this.searchByPrediction = prediction => {
@@ -689,7 +707,6 @@ class AppRoot {
                 this.searchByUserLocation();
                 return;
             }
-            this.loading = true;
             this.service.getDetails({
                 placeId: prediction.place_id
             }, details => {
@@ -700,6 +717,7 @@ class AppRoot {
         this.getRefugeRestroomResults = (latlng) => {
             this.clearMarkers();
             this.setResults([]);
+            this.setLoading(true);
             // this.map.panTo(latlng);
             let url = "https://cors-anywhere.herokuapp.com/" +
                 "https://www.refugerestrooms.org/api/v1/restrooms/by_location.json?" +
@@ -748,6 +766,7 @@ class AppRoot {
                 bounds.extend(marker.getPosition());
             });
             this.map.fitBounds(bounds);
+            this.setLoading(false);
         };
         // Update which markers are visible
         this.updateMarkers = () => {
@@ -776,6 +795,8 @@ class AppRoot {
             this.markers.forEach(function (marker) {
                 marker.setMap(null);
             });
+            this.setFocusedResult(undefined);
+            this.setLoading(false);
         };
     }
     componentWillLoad() {
@@ -789,7 +810,8 @@ class AppRoot {
             setMarkers,
             setUserLocation,
             setFocusedResult,
-            setSelectedResult
+            setSelectedResult,
+            setLoading
         });
     }
     componentDidLoad() {
@@ -800,21 +822,14 @@ class AppRoot {
         });
         this.service = new google.maps.places.PlacesService(this.map);
         if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(this.setUserPosition);
+            navigator.geolocation.getCurrentPosition(this.setUserPosition, () => {
+                this.setLoading(false);
+            });
             // navigator.geolocation.watchPosition(this.updateUserPosition);
         }
     }
     render() {
         this.updateMarkers();
-        // let overlayClasses = classNames({
-        //   "location-container": true,
-        //   hidden: this.results.length > 0
-        // });
-        // let buttonClasses = classNames({
-        //   cta: true,
-        //   "location-search": true,
-        //   hidden: !("geolocation" in navigator)
-        // });
         return [
             h("refuge-header", { handleSearch: this.searchByPrediction }),
             h("refuge-map", { id: "refuge-map" }),
@@ -898,8 +913,8 @@ class RefugeFilter {
             setMarkers
         });
         this.store.mapStateToProps(this, state => {
-            const { app: { filter, markers } } = state;
-            return { filter, markers };
+            const { app: { filter, markers, results } } = state;
+            return { filter, markers, results };
         });
     }
     render() {
@@ -907,22 +922,30 @@ class RefugeFilter {
             "refuge-filter": true,
             hidden: this.markers.length <= 0
         });
+        let results = "";
+        if (this.markers.length > 0) {
+            results = `(${this.markers.length})`;
+        }
         return (h("div", { class: classes },
             h("div", { class: "left" },
-                h("h5", { class: "filter-label" }, "Filter:"),
-                h("span", { class: this.getActive(this.filter.accessible), onClick: () => {
+                h("span", { class: "filter label" },
+                    "Restrooms ",
+                    results)),
+            h("div", { class: "right" },
+                h("span", { class: this.getActive(this.filter.accessible), onClick: e => {
+                        e.preventDefault();
                         this.setResultsFilter({ accessible: !this.filter.accessible });
                     } }, "accessible"),
-                h("span", { class: this.getActive(this.filter.unisex), onClick: () => {
+                h("span", { class: this.getActive(this.filter.unisex), onClick: e => {
+                        e.preventDefault();
                         this.setResultsFilter({ unisex: !this.filter.unisex });
                     } }, "wc"),
-                h("span", { class: this.getActive(this.filter.changing_table), onClick: () => {
+                h("span", { class: this.getActive(this.filter.changing_table), onClick: e => {
+                        e.preventDefault();
                         this.setResultsFilter({
                             changing_table: !this.filter.changing_table
                         });
-                    } }, "child_care")),
-            h("div", { class: "right" },
-                h("h5", { class: "clear-link", onClick: this.clearResults }, "Clear"))));
+                    } }, "child_care"))));
     }
     static get is() { return "refuge-filter"; }
     static get properties() { return {
@@ -936,7 +959,7 @@ class RefugeFilter {
             "context": "store"
         }
     }; }
-    static get style() { return "refuge-filter {\n  grid-row: 3;\n  grid-column: span 4;\n  width: 100%;\n  background: var(--blue-med);\n  -webkit-transition: all 0.25s;\n  transition: all 0.25s;\n  /* Component styles go here */\n}\n\n.refuge-filter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n  -ms-flex-pack: justify;\n  justify-content: space-between;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  width: 100vw;\n  height: auto;\n  padding: 8px 0;\n}\n\n.filter-icon {\n  display: inline;\n  color: var(--white);\n  -ms-flex-item-align: center;\n  align-self: center;\n}\n\n.inactive {\n  color: var(--med-grey);\n}\n\n.filter-label {\n  display: inline;\n  margin: 8px;\n  color: var(--white);\n}\n\n.clear-link {\n  display: inline;\n  margin: 8px;\n  color: var(--white);\n}\n\n.left {\n  text-align: left;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n}\n\n.right {\n  text-align: right;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n}\n\n.hidden {\n  height: 0;\n  padding: 0 0 0 0;\n  -webkit-transition: all 0.25s;\n  transition: all 0.25s;\n  overflow: hidden;\n}"; }
+    static get style() { return "refuge-filter {\n  grid-row: 3;\n  grid-column: span 4;\n  width: 100%;\n  background: var(--blue-med);\n  -webkit-transition: all 0.25s;\n  transition: all 0.25s;\n  border-top: 1px solid var(--blue-dark);\n  /* Component styles go here */\n}\n\n.refuge-filter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n  -ms-flex-pack: justify;\n  justify-content: space-between;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  width: 100vw;\n  height: auto;\n  padding: 12px 0;\n}\n\n.filter-icon {\n  cursor: pointer;\n  display: inline;\n  color: var(--white);\n  -ms-flex-item-align: center;\n  align-self: center;\n}\n\n.inactive {\n  color: var(--dark-blue);\n}\n\n.filter {\n  display: inline;\n  color: var(--white);\n}\n\n.left {\n  margin-left: 16px;\n  text-align: left;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n}\n\n.right {\n  margin-right: 24px;\n  text-align: right;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n}\n\n.hidden {\n  height: 0;\n  padding: 0 0 0 0;\n  -webkit-transition: all 0.25s;\n  transition: all 0.25s;\n  overflow: hidden;\n}"; }
 }
 
 class RefugeMap {
@@ -958,10 +981,14 @@ class RefugePredictions {
         });
     }
     render() {
+        this.elem.classList.toggle("open", this.predictions.length > 0);
         return this.predictions;
     }
     static get is() { return "refuge-predictions"; }
     static get properties() { return {
+        "elem": {
+            "elementRef": true
+        },
         "predictions": {
             "state": true
         },
@@ -969,7 +996,7 @@ class RefugePredictions {
             "context": "store"
         }
     }; }
-    static get style() { return "refuge-predictions {\n  position: absolute;\n  top: 60px;\n  width: 100%;\n  max-height: 50vh;\n  overflow: scroll;\n  list-style-type: none;\n  margin: 0;\n  background: var(--white);\n  color: var(--blue-dark);\n  -webkit-box-shadow: var(--shadow);\n  box-shadow: var(--shadow);\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n}\n\n.hidden {\n  height: 0;\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n}"; }
+    static get style() { return "refuge-predictions {\n  position: absolute;\n  top: 60px;\n  width: 100%;\n  max-height: 50vh;\n  overflow: scroll;\n  list-style-type: none;\n  margin: none;\n  background: none;\n  border-bottom: none;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n}\n\n.open {\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n  background: var(--white);\n  border-bottom: 1px solid var(--light-grey);\n  -webkit-box-shadow: var(--shadow);\n  box-shadow: var(--shadow);\n}"; }
 }
 
 class RefugeResult {
@@ -982,17 +1009,20 @@ class RefugeResult {
         };
     }
     render() {
-        let resultClass = classnames({
-            "refuge-result": true,
-            focused: this.focused
-        });
-        return (h("li", { class: resultClass },
-            h("h2", null, this.result.name),
-            h("p", null, this.result.street),
-            h("p", null,
+        let markerImage = this.focused
+            ? "marker-focused.svg"
+            : "marker-default.svg";
+        return [
+            h("div", { class: "left" },
+                h("img", { class: "icon marker", src: "assets/icons/" + markerImage })),
+            h("div", { class: "center" },
+                h("p", { class: "result-name" }, this.result.name),
+                h("p", { class: "result-address" }, this.result.street)),
+            h("div", { class: "right" },
                 h("span", { class: this.getVisible("accessible") }, "accessible"),
                 h("span", { class: this.getVisible("unisex") }, "wc"),
-                h("span", { class: this.getVisible("changing_table") }, "child_care"))));
+                h("span", { class: this.getVisible("changing_table") }, "child_care"))
+        ];
     }
     static get is() { return "refuge-result"; }
     static get properties() { return {
@@ -1005,7 +1035,7 @@ class RefugeResult {
             "attr": "result"
         }
     }; }
-    static get style() { return "refuge-result {\n  /* Component styles go here */\n}\n\n.refuge-result {\n  padding: 4px 0;\n  margin: 0;\n  color: var(--black);\n}\n\n.inactive {\n  color: var(--dark-grey);\n}\n\n.focused {\n  color: var(--med-red);\n}"; }
+    static get style() { return "refuge-result {\n  display: grid;\n  grid-template-columns: 48px auto 120px 24px;\n  -webkit-box-align: center;\n  -ms-flex-align: center;\n  align-items: center;\n  /* padding: 16px 24px 16px 16px; */\n  /* Component styles go here */\n}\n\n.result-name {\n  display: block;\n  padding: 0;\n  margin: 0;\n}\n\n.result-address {\n  display: block;\n  padding: 0;\n  margin: 0;\n  color: var(--dark-grey);\n}\n\n.marker {\n  height: 24px;\n  width: 18px;\n}\n\n.left {\n  grid-column: 1;\n  text-align: center;\n}\n\n.center {\n  grid-column: 2;\n  text-align: left;\n  padding-right: 16px;\n  padding: 20px 16px 20px 0;\n  border-bottom: 1px solid var(--light-grey);\n}\n\n.right {\n  grid-column: 3;\n}"; }
 }
 
 class RefugeResults {
@@ -1079,7 +1109,7 @@ class RefugeResults {
             "context": "store"
         }
     }; }
-    static get style() { return "refuge-results {\n  grid-row: 5;\n  overflow: scroll;\n  position: relative;\n  width: 100%;\n  background: var(--white);\n  color: var(--blue-dark);\n  -webkit-box-shadow: var(--shadow);\n  box-shadow: var(--shadow);\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n}\n\n.hidden {\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n  height: 0;\n}\n\nul {\n  list-style-type: none;\n  padding: 0px 8px;\n  margin: 0;\n}"; }
+    static get style() { return "refuge-results {\n  grid-row: 5;\n  overflow: scroll;\n  position: relative;\n  width: 100%;\n  background: var(--white);\n  -webkit-box-shadow: var(--shadow);\n  box-shadow: var(--shadow);\n  overflow-y: scroll;\n  -webkit-overflow-scrolling: touch;\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n}\n\n.hidden {\n  -webkit-transition: height 0.25s;\n  transition: height 0.25s;\n  height: 0;\n}\n\nul {\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}"; }
 }
 
 export { AppRoot, RefugeFilter, RefugeMap, RefugePredictions, RefugeResult, RefugeResults };

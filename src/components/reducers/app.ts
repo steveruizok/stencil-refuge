@@ -14,6 +14,7 @@ interface AppState {
   location: any;
   focused: any;
   selected: any;
+  loading: boolean;
 }
 
 const getInitialState = () => {
@@ -30,7 +31,8 @@ const getInitialState = () => {
     predictions: [],
     location: undefined,
     focused: undefined,
-    selected: undefined
+    selected: undefined,
+    loading: false
   };
 };
 
@@ -44,9 +46,15 @@ const app = (state: AppState = getInitialState(), action: ActionTypes) => {
       return { ...state, filter: newFilter };
     }
     case TypeKeys.SET_RESULTS: {
+      if (!state.loading) {
+        return state;
+      }
       return { ...state, results: action.results };
     }
     case TypeKeys.SET_MARKERS: {
+      if (!state.loading) {
+        return state;
+      }
       return { ...state, markers: action.markers };
     }
     case TypeKeys.SET_PREDICTIONS: {
@@ -60,6 +68,23 @@ const app = (state: AppState = getInitialState(), action: ActionTypes) => {
     }
     case TypeKeys.SET_SELECTED_RESULT: {
       return { ...state, selected: action.selected };
+    }
+    case TypeKeys.SET_LOADING: {
+      return { ...state, loading: action.loading };
+    }
+    case TypeKeys.RESET_ALL: {
+      state.markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+
+      return {
+        ...state,
+        loading: false,
+        results: [],
+        focused: undefined,
+        selected: undefined,
+        predictions: []
+      };
     }
   }
 

@@ -1,0 +1,49 @@
+/*! Built with http://stenciljs.com */
+App.loadBundle('/**:bundle-id:**/', ['exports'], function (exports) {
+    var h = window.App.h;
+    var AppCounter = /** @class */ (function () {
+        function AppCounter() {
+        }
+        AppCounter.prototype.render = function () {
+            var _this = this;
+            return (h("div", null, h("button", { onClick: function () {
+                    _this.changeCount(-10);
+                } }, "-10"), h("button", { onClick: function () {
+                    _this.changeCount(-1);
+                } }, "-1"), h("span", { class: "count" }, this.count), h("button", { onClick: function () {
+                    _this.changeCount(1);
+                } }, "+1"), h("button", { onClick: function () {
+                    _this.changeCount(10);
+                } }, "+10")));
+        };
+        Object.defineProperty(AppCounter, "is", {
+            get: function () { return "app-counter"; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AppCounter, "properties", {
+            get: function () {
+                return {
+                    "changeCount": {
+                        "type": "Any",
+                        "attr": "change-count"
+                    },
+                    "count": {
+                        "type": Number,
+                        "attr": "count"
+                    }
+                };
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AppCounter, "style", {
+            get: function () { return "/**style-placeholder:app-counter:**/"; },
+            enumerable: true,
+            configurable: true
+        });
+        return AppCounter;
+    }());
+    exports.AppCounter = AppCounter;
+    Object.defineProperty(exports, '__esModule', { value: true });
+});
