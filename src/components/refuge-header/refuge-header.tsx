@@ -21,6 +21,7 @@ export class RefugeHeader {
   @State() predictions: Array<any> = [];
   @State() markers: any;
   @State() loading: any;
+  @Prop() autocomplete: any;
 
   setPredictions: Action;
   setResults: Action;
@@ -31,7 +32,6 @@ export class RefugeHeader {
   hasText;
   input;
   service;
-  autocomplete;
   predictionsContainer;
 
   componentWillLoad() {}
@@ -52,8 +52,6 @@ export class RefugeHeader {
 
       return { service, map, predictions, markers, loading };
     });
-
-    this.autocomplete = new google.maps.places.AutocompleteService();
   }
 
   clearPredictions = () => {
@@ -112,10 +110,10 @@ export class RefugeHeader {
   };
 
   handleRightClick = () => {
-    if (document.hasFocus()) {
+    if (this.markers.length > 0) {
       // clear input content
       this.input.value = null;
-      this.clearPredictions();
+      this.resetAll();
     } else if (this.input.value.length > 0) {
       // clear map
       this.input.value = null;
@@ -132,9 +130,11 @@ export class RefugeHeader {
     let containerClasses, rightIcon, leftIcon, rightIconClasses;
 
     if (this.loading) {
-      leftIcon = <refuge-spinner class="small" />;
+      leftIcon = <ref-spinner class="header-icon left-icon small" />;
     } else {
-      leftIcon = "search";
+      leftIcon = (
+        <img class="header-icon left-icon" src={"assets/icons/search.svg"} />
+      );
     }
 
     if ((this.input && this.input.value.length > 0) || this.loading) {
@@ -173,7 +173,9 @@ export class RefugeHeader {
             this.getPredictions(event);
           }}
         />
-        <span class="header-icon left-icon material-icons">{leftIcon}</span>
+        <div class="header-icon left-icon">{leftIcon}</div>
+
+        {/* <span class="header-icon left-icon material-icons">{leftIcon}</span> */}
         <span class={rightIconClasses} onClick={this.handleRightClick}>
           {rightIcon}
         </span>

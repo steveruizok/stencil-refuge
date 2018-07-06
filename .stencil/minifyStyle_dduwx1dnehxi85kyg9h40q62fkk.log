@@ -1,0 +1,1 @@
+refuge-results{grid-row:5;position:relative;width:100%;height:auto;background:var(--white);-webkit-transition:height .25s;transition:height .25s}.refuge-results{-webkit-transition:height .15s;transition:height .15s;height:0;overflow:scroll;overflow-y:scroll;-webkit-overflow-scrolling:touch}.open{-webkit-transition:height .25s;transition:height .25s;height:40vh}

@@ -2,42 +2,42 @@
   "namespace": "App",
   "fsNamespace": "app",
   "loader": "../app.js",
-  "corePolyfilled": "es5-build-disabled.js",
   "global": "app.global.js",
-  "core": "app.core.js",
+  "core": "app.onlaozns.js",
+  "corePolyfilled": "app.sidvzhvv.js",
   "components": {
-    "app-counter": {
-      "$": "app-counter"
-    },
-    "app-detail": {
-      "$": "app-detail"
-    },
     "app-root": {
-      "$": "app-root"
+      "$": "uvwujel5"
+    },
+    "ref-icon": {
+      "$": "fqwhloyh"
+    },
+    "ref-spinner": {
+      "$": "z1oddiuv"
+    },
+    "refuge-detail": {
+      "$": "uvwujel5"
     },
     "refuge-filter": {
-      "$": "app-root"
+      "$": "uvwujel5"
     },
     "refuge-header": {
-      "$": "refuge-header"
+      "$": "z1oddiuv"
     },
     "refuge-map": {
-      "$": "app-root"
+      "$": "uvwujel5"
     },
     "refuge-prediction": {
-      "$": "refuge-header"
+      "$": "z1oddiuv"
     },
     "refuge-predictions": {
-      "$": "app-root"
+      "$": "uvwujel5"
     },
     "refuge-result": {
-      "$": "app-root"
+      "$": "uvwujel5"
     },
     "refuge-results": {
-      "$": "app-root"
-    },
-    "refuge-spinner": {
-      "$": "refuge-header"
+      "$": "uvwujel5"
     }
   }
 }

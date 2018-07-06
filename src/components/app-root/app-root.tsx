@@ -9,9 +9,10 @@ import {
   setSelectedResult,
   setLoading
 } from "../actions/app";
-// import classNames from "classnames";
 
 import { Filter } from "../../types";
+
+declare var google: any;
 
 @Component({
   tag: "app-root",
@@ -25,6 +26,7 @@ export class AppRoot {
   @State() service: any;
   @State() filter: Filter;
   @State() loading: boolean = true;
+  @State() autocomplete: any;
 
   setResults: Action;
   @State() results: any;
@@ -44,6 +46,18 @@ export class AppRoot {
   setLoading: Action;
 
   userLocationMarker: any;
+
+  script: HTMLScriptElement;
+
+  loadScript() {
+    return new Promise(resolve => {
+      this.script = document.createElement("script");
+      this.script.src =
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBn5_4mxpPCKRVuLL1TlL_P62lNXInDXHA&libraries=places";
+      document.body.appendChild(this.script);
+      resolve();
+    });
+  }
 
   componentWillLoad() {
     this.store.setStore(configureStore(undefined));
@@ -65,22 +79,29 @@ export class AppRoot {
     });
   }
 
-  componentDidLoad() {
-    this.map = new google.maps.Map(document.getElementById("refuge-map"), {
-      center: { lat: -33.8688, lng: 151.2195 },
-      zoom: 13,
-      disableDefaultUI: true
-    });
+  async componentDidLoad() {
+    await this.loadScript();
 
-    this.service = new google.maps.places.PlacesService(this.map);
-
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(this.setUserPosition, () => {
-        this.setLoading(false);
+    this.script.addEventListener("load", async () => {
+      this.map = new google.maps.Map(document.getElementById("refuge-map"), {
+        center: { lat: -33.8688, lng: 151.2195 },
+        zoom: 13,
+        disableDefaultUI: true
       });
-      // navigator.geolocation.watchPosition(this.updateUserPosition);
-    }
+
+      this.service = new google.maps.places.PlacesService(this.map);
+
+      this.autocomplete = new google.maps.places.AutocompleteService();
+
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(this.setUserPosition, () => {
+          this.setLoading(false);
+        });
+        // navigator.geolocation.watchPosition(this.updateUserPosition);
+      }
+    });
   }
+
   // Update the user location on the map
   setUserPosition = position => {
     this.setUserLocation(
@@ -179,21 +200,24 @@ export class AppRoot {
     let markers;
 
     markers = this.results.map(result => {
-      let marker = new window["Marker"]({
+      let marker = new google.maps.Marker({
         map: this.map,
         position: new google.maps.LatLng(result.latitude, result.longitude),
         title: result.name,
-        // animation: google.maps.Animation.DROP
-        icon: {
-          path: window["MAP_PIN"],
-          fillColor: "#00CCBB",
-          fillOpacity: 1,
-          strokeColor: "",
-          strokeWeight: 0
-        }
+        icon: "assets/icons/marker-default.svg"
       });
 
       marker.addListener("click", () => {
+        if (this.selected === result) {
+          this.setSelectedResult(undefined);
+          return;
+        }
+
+        if (this.focused === result) {
+          this.setSelectedResult(result);
+          return;
+        }
+
         this.setFocusedResult(result);
       });
 
@@ -225,19 +249,13 @@ export class AppRoot {
         }
       }
 
-      let color = "#0072d9";
+      let image = "marker-default";
 
       if (res === this.focused) {
-        color = "#e93f3b";
+        image = "marker-focused";
       }
 
-      this.markers[i].setIcon({
-        path: window["MAP_PIN"],
-        fillColor: color,
-        fillOpacity: 1,
-        strokeColor: "#FFFFFF",
-        strokeWeight: 2
-      });
+      this.markers[i].setIcon(`/assets/icons/${image}.svg`);
       this.markers[i].setVisible(ok);
     });
   };
@@ -254,7 +272,10 @@ export class AppRoot {
     this.updateMarkers();
 
     return [
-      <refuge-header handleSearch={this.searchByPrediction} />,
+      <refuge-header
+        handleSearch={this.searchByPrediction}
+        autocomplete={this.autocomplete}
+      />,
 
       <refuge-map id="refuge-map" />,
 
@@ -262,7 +283,9 @@ export class AppRoot {
 
       <refuge-results results={this.results} />,
 
-      <refuge-predictions />
+      <refuge-predictions />,
+
+      <refuge-detail />
 
       // <div class={overlayClasses}>
       //   <button class={buttonClasses} onClick={this.searchByUserLocation}>

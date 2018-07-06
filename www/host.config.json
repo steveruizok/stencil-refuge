@@ -1,0 +1,53 @@
+{
+  "hosting": {
+    "rules": [
+      {
+        "include": "/",
+        "headers": [
+          {
+            "name": "Link",
+            "value": "</build/app/app.sidvzhvv.js>;rel=preload;as=script"
+          },
+          {
+            "name": "Link",
+            "value": "</build/app/fqwhloyh.js>;rel=preload;as=script"
+          },
+          {
+            "name": "Link",
+            "value": "</build/app/uvwujel5.js>;rel=preload;as=script"
+          },
+          {
+            "name": "Link",
+            "value": "</build/app/z1oddiuv.js>;rel=preload;as=script"
+          },
+          {
+            "name": "Link",
+            "value": "</assets/icons/search.svg>;rel=preload;as=image"
+          },
+          {
+            "name": "Link",
+            "value": "</assets/icons/accessible.svg>;rel=preload;as=image"
+          }
+        ]
+      },
+      {
+        "include": "/build/app/**",
+        "headers": [
+          {
+            "name": "Cache-Control",
+            "value": "public, max-age=31536000"
+          }
+        ]
+      },
+      {
+        "include": "/sw.js",
+        "headers": [
+          {
+            "name": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      }
+    ]
+  }
+}

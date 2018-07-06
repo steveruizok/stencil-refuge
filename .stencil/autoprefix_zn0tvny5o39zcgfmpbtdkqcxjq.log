@@ -1,0 +1,48 @@
+refuge-result {
+  display: grid;
+  grid-template-columns: 48px auto 120px 24px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  /* padding: 16px 24px 16px 16px; */
+  /* Component styles go here */
+}
+
+.result-name {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.result-address {
+  display: block;
+  padding: 0;
+  margin: 0;
+  color: var(--dark-grey);
+}
+
+.marker {
+  height: 24px;
+  width: 18px;
+}
+
+.left {
+  grid-column: 1;
+  text-align: center;
+}
+
+.center {
+  grid-column: 2;
+  text-align: left;
+  padding-right: 16px;
+  padding: 20px 16px 20px 0;
+  border-bottom: 1px solid var(--light-grey);
+}
+
+.right {
+  grid-column: 3;
+}
+
+.inactive {
+  opacity: 0.5;
+}

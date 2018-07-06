@@ -1,0 +1,42 @@
+/*! Built with http://stenciljs.com */
+App.loadBundle('/**:bundle-id:**/', ['exports'], function (exports) {
+    var h = window.App.h;
+    var RefIcon = /** @class */ (function () {
+        function RefIcon() {
+            this.icon = "close";
+            this.classes = "icon";
+        }
+        RefIcon.prototype.render = function () {
+            return (h("img", { class: this.classes, src: "assets/icons/" + this.icon + ".svg" }));
+        };
+        Object.defineProperty(RefIcon, "is", {
+            get: function () { return "ref-icon"; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(RefIcon, "properties", {
+            get: function () {
+                return {
+                    "classes": {
+                        "type": String,
+                        "attr": "classes"
+                    },
+                    "icon": {
+                        "type": String,
+                        "attr": "icon"
+                    }
+                };
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(RefIcon, "style", {
+            get: function () { return "/**style-placeholder:ref-icon:**/"; },
+            enumerable: true,
+            configurable: true
+        });
+        return RefIcon;
+    }());
+    exports.RefIcon = RefIcon;
+    Object.defineProperty(exports, '__esModule', { value: true });
+});

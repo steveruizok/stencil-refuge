@@ -10,7 +10,7 @@ export class RefugePrediction {
   render() {
     return (
       <li class="prediction-container">
-        <img class="icon marker" src="assets/icons/marker-default.svg" />
+        <ref-icon classes="icon marker" icon="marker-default" />
         <span class="prediction-content">
           <slot />
         </span>

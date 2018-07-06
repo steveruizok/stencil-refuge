@@ -23,11 +23,6 @@ refuge-prediction {
   bottom: 0px;
 }
 
-.marker {
-  height: 24px;
-  width: 18px;
-}
-
 .prediction-content {
   padding-left: 16px;
   height: 100%;

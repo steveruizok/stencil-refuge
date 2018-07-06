@@ -1,6 +1,6 @@
 refuge-result {
   display: grid;
-  grid-template-columns: 48px auto 120px 24px;
+  grid-template-columns: 48px auto 120px;
   align-items: center;
   /* padding: 16px 24px 16px 16px; */
   /* Component styles go here */
@@ -19,12 +19,7 @@ refuge-result {
   color: var(--dark-grey);
 }
 
-.marker {
-  height: 24px;
-  width: 18px;
-}
-
-.left {
+.result-left {
   grid-column: 1;
   text-align: center;
 }

@@ -1,6 +1,6 @@
 refuge-header {
   grid-row: 1;
-  color: var(--white);
+  color: var(--black);
   background-color: var(--blue-med);
 }
 
@@ -44,7 +44,11 @@ refuge-header {
 }
 
 .left-icon {
+  display: flex;
+  width: 100%;
   grid-column: 2;
+  text-align: center;
+  align-content: center;
 }
 
 .right-icon {

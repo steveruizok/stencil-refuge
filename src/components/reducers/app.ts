@@ -64,7 +64,11 @@ const app = (state: AppState = getInitialState(), action: ActionTypes) => {
       return { ...state, location: action.location };
     }
     case TypeKeys.SET_FOCUSED_RESULT: {
-      return { ...state, focused: action.focused };
+      return {
+        ...state,
+        focused: action.focused,
+        selected: undefined
+      };
     }
     case TypeKeys.SET_SELECTED_RESULT: {
       return { ...state, selected: action.selected };
@@ -83,7 +87,8 @@ const app = (state: AppState = getInitialState(), action: ActionTypes) => {
         results: [],
         focused: undefined,
         selected: undefined,
-        predictions: []
+        predictions: [],
+        markers: []
       };
     }
   }

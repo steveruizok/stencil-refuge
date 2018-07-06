@@ -31,74 +31,6 @@ import '@stencil/redux';
 declare global {
 
   namespace StencilComponents {
-    interface AppCounter {
-      'changeCount': any;
-      'count': number;
-    }
-  }
-
-  interface HTMLAppCounterElement extends StencilComponents.AppCounter, HTMLStencilElement {}
-
-  var HTMLAppCounterElement: {
-    prototype: HTMLAppCounterElement;
-    new (): HTMLAppCounterElement;
-  };
-  interface HTMLElementTagNameMap {
-    'app-counter': HTMLAppCounterElement;
-  }
-  interface ElementTagNameMap {
-    'app-counter': HTMLAppCounterElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'app-counter': JSXElements.AppCounterAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface AppCounterAttributes extends HTMLAttributes {
-      'changeCount'?: any;
-      'count'?: number;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface AppDetail {
-
-    }
-  }
-
-  interface HTMLAppDetailElement extends StencilComponents.AppDetail, HTMLStencilElement {}
-
-  var HTMLAppDetailElement: {
-    prototype: HTMLAppDetailElement;
-    new (): HTMLAppDetailElement;
-  };
-  interface HTMLElementTagNameMap {
-    'app-detail': HTMLAppDetailElement;
-  }
-  interface ElementTagNameMap {
-    'app-detail': HTMLAppDetailElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'app-detail': JSXElements.AppDetailAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface AppDetailAttributes extends HTMLAttributes {
-
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
     interface AppRoot {
 
     }
@@ -123,6 +55,39 @@ declare global {
   }
   namespace JSXElements {
     export interface AppRootAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface RefugeDetail {
+
+    }
+  }
+
+  interface HTMLRefugeDetailElement extends StencilComponents.RefugeDetail, HTMLStencilElement {}
+
+  var HTMLRefugeDetailElement: {
+    prototype: HTMLRefugeDetailElement;
+    new (): HTMLRefugeDetailElement;
+  };
+  interface HTMLElementTagNameMap {
+    'refuge-detail': HTMLRefugeDetailElement;
+  }
+  interface ElementTagNameMap {
+    'refuge-detail': HTMLRefugeDetailElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'refuge-detail': JSXElements.RefugeDetailAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface RefugeDetailAttributes extends HTMLAttributes {
 
     }
   }
@@ -166,6 +131,7 @@ declare global {
 
   namespace StencilComponents {
     interface RefugeHeader {
+      'autocomplete': any;
       'handleSearch': Function;
       'searchBar': boolean;
     }
@@ -190,6 +156,7 @@ declare global {
   }
   namespace JSXElements {
     export interface RefugeHeaderAttributes extends HTMLAttributes {
+      'autocomplete'?: any;
       'handleSearch'?: Function;
       'searchBar'?: boolean;
     }
@@ -335,7 +302,7 @@ declare global {
 
   namespace StencilComponents {
     interface RefugeResults {
-      'results': any;
+
     }
   }
 
@@ -358,7 +325,7 @@ declare global {
   }
   namespace JSXElements {
     export interface RefugeResultsAttributes extends HTMLAttributes {
-      'results'?: any;
+
     }
   }
 }
@@ -367,30 +334,65 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface RefugeSpinner {
-
+    interface RefIcon {
+      'classes': string;
+      'icon': string;
     }
   }
 
-  interface HTMLRefugeSpinnerElement extends StencilComponents.RefugeSpinner, HTMLStencilElement {}
+  interface HTMLRefIconElement extends StencilComponents.RefIcon, HTMLStencilElement {}
 
-  var HTMLRefugeSpinnerElement: {
-    prototype: HTMLRefugeSpinnerElement;
-    new (): HTMLRefugeSpinnerElement;
+  var HTMLRefIconElement: {
+    prototype: HTMLRefIconElement;
+    new (): HTMLRefIconElement;
   };
   interface HTMLElementTagNameMap {
-    'refuge-spinner': HTMLRefugeSpinnerElement;
+    'ref-icon': HTMLRefIconElement;
   }
   interface ElementTagNameMap {
-    'refuge-spinner': HTMLRefugeSpinnerElement;
+    'ref-icon': HTMLRefIconElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'refuge-spinner': JSXElements.RefugeSpinnerAttributes;
+      'ref-icon': JSXElements.RefIconAttributes;
     }
   }
   namespace JSXElements {
-    export interface RefugeSpinnerAttributes extends HTMLAttributes {
+    export interface RefIconAttributes extends HTMLAttributes {
+      'classes'?: string;
+      'icon'?: string;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface RefSpinner {
+
+    }
+  }
+
+  interface HTMLRefSpinnerElement extends StencilComponents.RefSpinner, HTMLStencilElement {}
+
+  var HTMLRefSpinnerElement: {
+    prototype: HTMLRefSpinnerElement;
+    new (): HTMLRefSpinnerElement;
+  };
+  interface HTMLElementTagNameMap {
+    'ref-spinner': HTMLRefSpinnerElement;
+  }
+  interface ElementTagNameMap {
+    'ref-spinner': HTMLRefSpinnerElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'ref-spinner': JSXElements.RefSpinnerAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface RefSpinnerAttributes extends HTMLAttributes {
 
     }
   }

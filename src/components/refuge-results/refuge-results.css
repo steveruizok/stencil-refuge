@@ -1,22 +1,21 @@
 refuge-results {
   grid-row: 5;
-  overflow: scroll;
   position: relative;
   width: 100%;
+  height: auto;
   background: var(--white);
-  box-shadow: var(--shadow);
+  transition: height 0.25s;
+}
+
+.refuge-results {
+  transition: height 0.15s;
+  height: 0px;
+  overflow: scroll;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  transition: height 0.25s;
 }
 
-.hidden {
+.open {
   transition: height 0.25s;
-  height: 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+  height: 40vh;
 }

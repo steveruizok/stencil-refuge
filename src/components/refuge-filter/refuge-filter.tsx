@@ -37,14 +37,6 @@ export class RefugeFilter {
     });
   }
 
-  getActive = (bool: boolean) => {
-    return classNames({
-      "inline-icon material-icons": true,
-      "filter-icon": true,
-      inactive: !bool
-    });
-  };
-
   clearResults = () => {
     this.clearMarkers();
     this.setResults([]);
@@ -55,6 +47,14 @@ export class RefugeFilter {
       marker.setMap(null);
     });
     this.setMarkers([]);
+  };
+
+  getActive = (bool: boolean) => {
+    return classNames({
+      icon: true,
+      padded: true,
+      inactive: !bool
+    });
   };
 
   render() {
@@ -75,35 +75,32 @@ export class RefugeFilter {
           <span class="filter label">Restrooms {results}</span>
         </div>
         <div class="right">
-          <span
-            class={this.getActive(this.filter.accessible)}
+          <ref-icon
+            classes={this.getActive(this.filter.accessible)}
+            icon="accessible"
             onClick={e => {
               e.preventDefault();
               this.setResultsFilter({ accessible: !this.filter.accessible });
             }}
-          >
-            accessible
-          </span>
-          <span
-            class={this.getActive(this.filter.unisex)}
+          />
+          <ref-icon
+            classes={this.getActive(this.filter.unisex)}
+            icon="unisex"
             onClick={e => {
               e.preventDefault();
               this.setResultsFilter({ unisex: !this.filter.unisex });
             }}
-          >
-            wc
-          </span>
-          <span
-            class={this.getActive(this.filter.changing_table)}
+          />
+          <ref-icon
+            classes={this.getActive(this.filter.changing_table)}
+            icon="changing_table"
             onClick={e => {
               e.preventDefault();
               this.setResultsFilter({
                 changing_table: !this.filter.changing_table
               });
             }}
-          >
-            child_care
-          </span>
+          />
         </div>
       </div>
     );
