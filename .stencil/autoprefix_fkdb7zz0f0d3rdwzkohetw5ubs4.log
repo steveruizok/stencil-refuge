@@ -2,14 +2,21 @@ refuge-filter {
   grid-row: 3;
   width: 100%;
   background: var(--blue-med);
+  -webkit-transition: all 0.25s;
   transition: all 0.25s;
   border-top: 1px solid var(--blue-dark);
   /* Component styles go here */
 }
 
 .refuge-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   width: 100%;
   height: auto;
@@ -20,6 +27,7 @@ refuge-filter {
   cursor: pointer;
   display: inline;
   color: var(--white);
+  -ms-flex-item-align: center;
   align-self: center;
 }
 
@@ -34,20 +42,29 @@ refuge-filter {
 
 .left {
   text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
 .right {
   margin-right: 12px;
   text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
 .hidden {
   height: 0;
   padding: 0 0 0 0;
+  -webkit-transition: all 0.25s;
   transition: all 0.25s;
   overflow: hidden;
 }

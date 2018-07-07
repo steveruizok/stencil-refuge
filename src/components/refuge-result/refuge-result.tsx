@@ -18,11 +18,11 @@ export class RefugeResult {
   };
 
   render() {
-    let markerIcon = this.focused ? "marker-focused" : "marker-default";
+    let markerIcon = this.focused ? "marker-focused-a" : "marker-default-a";
 
     return [
       <div class="result-left">
-        <ref-icon icon={markerIcon} />
+        <ref-icon classes="icon marker" icon={markerIcon} />
       </div>,
       <div class="center">
         <p class="result-name">{this.result.name}</p>

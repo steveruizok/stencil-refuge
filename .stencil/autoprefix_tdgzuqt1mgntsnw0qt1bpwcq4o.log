@@ -7,7 +7,7 @@ ref-icon {
 }
 
 .marker {
-  height: 42px;
+  height: 24px;
   width: 22px;
 }
 

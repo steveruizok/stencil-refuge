@@ -83,6 +83,7 @@ export class AppRoot {
     await this.loadScript();
 
     this.script.addEventListener("load", async () => {
+      console.log("ok...");
       this.map = new google.maps.Map(document.getElementById("refuge-map"), {
         center: { lat: -33.8688, lng: 151.2195 },
         zoom: 13,
@@ -94,10 +95,11 @@ export class AppRoot {
       this.autocomplete = new google.maps.places.AutocompleteService();
 
       if ("geolocation" in navigator) {
+        console.log("ok...");
         navigator.geolocation.getCurrentPosition(this.setUserPosition, () => {
           this.setLoading(false);
         });
-        // navigator.geolocation.watchPosition(this.updateUserPosition);
+        navigator.geolocation.watchPosition(this.updateUserPosition);
       }
     });
   }
@@ -119,22 +121,20 @@ export class AppRoot {
     this.userLocationMarker = new google.maps.Marker({
       position: this.location,
       map: this.map,
-      icon: {
-        path:
-          google.maps.SymbolPath[
-            position.heading ? "BACKWARD_CLOSED_ARROW" : "CIRCLE"
-          ],
-        scale: 3
-      }
+      icon: "/assets/icons/marker-location.png"
     });
 
-    this.userLocationMarker.icon.rotation = position.heading;
-    this.userLocationMarker.position = this.location;
     this.map.panTo(this.location);
     this.setLoading(false);
+    this.updateUserPosition();
 
     // testing
-    // this.searchByUserLocation();
+    this.searchByUserLocation();
+  };
+
+  updateUserPosition = () => {
+    // this.userLocationMarker.icon.rotation = position.heading;
+    this.userLocationMarker.position = this.location;
   };
 
   // Make a search using the user location
@@ -203,8 +203,8 @@ export class AppRoot {
       let marker = new google.maps.Marker({
         map: this.map,
         position: new google.maps.LatLng(result.latitude, result.longitude),
-        title: result.name,
-        icon: "assets/icons/marker-default.svg"
+        title: result.name
+        // icon: "assets/icons/marker-default.svg"
       });
 
       marker.addListener("click", () => {
@@ -249,10 +249,10 @@ export class AppRoot {
         }
       }
 
-      let image = "marker-default";
+      let image = "marker-default-a";
 
       if (res === this.focused) {
-        image = "marker-focused";
+        image = "marker-focused-a";
       }
 
       this.markers[i].setIcon(`/assets/icons/${image}.svg`);

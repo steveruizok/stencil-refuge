@@ -21,6 +21,8 @@
   --med-red: #ff5850;
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
   --text-body: 16px "Avenir", sans-serif;
+  background: #4e71ff;
+  border: 1px solid #414d9b;
 }
 
 .label {

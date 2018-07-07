@@ -7,37 +7,37 @@
   "corePolyfilled": "app.sidvzhvv.js",
   "components": {
     "app-root": {
-      "$": "uvwujel5"
+      "$": "mvgjf5fq"
     },
     "ref-icon": {
-      "$": "fqwhloyh"
+      "$": "jkekijgd"
     },
     "ref-spinner": {
-      "$": "z1oddiuv"
+      "$": "9gttx4rp"
     },
     "refuge-detail": {
-      "$": "uvwujel5"
+      "$": "mvgjf5fq"
     },
     "refuge-filter": {
-      "$": "uvwujel5"
+      "$": "mvgjf5fq"
     },
     "refuge-header": {
-      "$": "z1oddiuv"
+      "$": "9gttx4rp"
     },
     "refuge-map": {
-      "$": "uvwujel5"
+      "$": "mvgjf5fq"
     },
     "refuge-prediction": {
-      "$": "z1oddiuv"
+      "$": "9gttx4rp"
     },
     "refuge-predictions": {
-      "$": "uvwujel5"
+      "$": "mvgjf5fq"
     },
     "refuge-result": {
-      "$": "uvwujel5"
+      "$": "mvgjf5fq"
     },
     "refuge-results": {
-      "$": "uvwujel5"
+      "$": "mvgjf5fq"
     }
   }
 }

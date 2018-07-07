@@ -48,12 +48,32 @@ self.__precacheManifest = [
     "revision": "ee597478cdff0c280b40f744f465cd9c"
   },
   {
+    "url": "assets/icons/marker-default-a.png",
+    "revision": "b9015760ce54f88d7d4f632832c8d082"
+  },
+  {
+    "url": "assets/icons/marker-default-a.svg",
+    "revision": "abfd5486b50dedddee26179dfb508b22"
+  },
+  {
     "url": "assets/icons/marker-default.svg",
     "revision": "5d9c7f537455e5afb3c0049f0a877539"
   },
   {
+    "url": "assets/icons/marker-focused-a.png",
+    "revision": "e29cc25602096f84e691316fec7d9303"
+  },
+  {
+    "url": "assets/icons/marker-focused-a.svg",
+    "revision": "3ee761b63b14744d766100d47e25333f"
+  },
+  {
     "url": "assets/icons/marker-focused.svg",
     "revision": "8ac043d7da231ba0bd2f6c7a84b70e98"
+  },
+  {
+    "url": "assets/icons/marker-location.png",
+    "revision": "5bbe1aba63f0a28386d6f2674ddb6f92"
   },
   {
     "url": "assets/icons/my-location.svg",
@@ -85,11 +105,19 @@ self.__precacheManifest = [
   },
   {
     "url": "build/app.css",
-    "revision": "8e9c602fe9144aa42176037cbabc0e8c"
+    "revision": "cd812a27c2bce721565895a6af9f8c1e"
   },
   {
     "url": "build/app.js",
-    "revision": "b4e1467dfdccdb22294cd1c9221d2c37"
+    "revision": "a1db58cb71613ec367aa511d3be9d3f4"
+  },
+  {
+    "url": "build/app/9gttx4rp.es5.js",
+    "revision": "12cefca30cc3d6f9dc7b7a91f525f8df"
+  },
+  {
+    "url": "build/app/9gttx4rp.js",
+    "revision": "c170c24e34344af734bfeb85808c82bd"
   },
   {
     "url": "build/app/app.onlaozns.js",
@@ -108,32 +136,24 @@ self.__precacheManifest = [
     "revision": "b94deabceea03ac676372eb588830fa6"
   },
   {
-    "url": "build/app/fqwhloyh.es5.js",
-    "revision": "68b2780437bfb4ecd1d1a17c12358369"
+    "url": "build/app/jkekijgd.es5.js",
+    "revision": "8fd0fe9a999967816a111cee1892e527"
   },
   {
-    "url": "build/app/fqwhloyh.js",
-    "revision": "38c0c0804e45abfedc31c0a3d1f0a641"
+    "url": "build/app/jkekijgd.js",
+    "revision": "a0a52626148e47b794a6274a7771e513"
   },
   {
-    "url": "build/app/uvwujel5.es5.js",
-    "revision": "a28766dd29ccb2863ca52705187b2bef"
+    "url": "build/app/mvgjf5fq.es5.js",
+    "revision": "1fd5c2eca41925affd5e51c18de9ad8c"
   },
   {
-    "url": "build/app/uvwujel5.js",
-    "revision": "2c3836000a1875b94a99761370bf13cf"
-  },
-  {
-    "url": "build/app/z1oddiuv.es5.js",
-    "revision": "76175c850d578d9547f78247357af23c"
-  },
-  {
-    "url": "build/app/z1oddiuv.js",
-    "revision": "2d242609282ba3e188e7bc5cbb9a3fba"
+    "url": "build/app/mvgjf5fq.js",
+    "revision": "867c5fa46928ec7e74549dbe6ad82d48"
   },
   {
     "url": "index.html",
-    "revision": "5230d1a745156c887f6e5d6cebc94088"
+    "revision": "5d75a37634779e31b8afdbc6453ae3e6"
   },
   {
     "url": "manifest.json",
