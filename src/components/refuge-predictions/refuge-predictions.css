@@ -2,7 +2,6 @@ refuge-predictions {
   position: absolute;
   top: 60px;
   width: 100%;
-  max-height: 50vh;
   overflow: scroll;
   list-style-type: none;
   margin: none;
@@ -10,11 +9,13 @@ refuge-predictions {
   border-bottom: none;
   box-shadow: none;
   transition: height 0.25s;
+  z-index: 200;
 }
 
 .open {
   transition: height 0.25s;
-  background: var(--white);
-  border-bottom: 1px solid var(--light-grey);
+  background: var(--pale-grey);
+  border-bottom: 1px solid var(--med-grey);
   box-shadow: var(--shadow);
+  min-height: 80vh;
 }

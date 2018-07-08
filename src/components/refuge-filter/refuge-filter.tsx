@@ -53,7 +53,8 @@ export class RefugeFilter {
     return classNames({
       icon: true,
       padded: true,
-      inactive: !bool
+      inactive: !bool,
+      link: true
     });
   };
 

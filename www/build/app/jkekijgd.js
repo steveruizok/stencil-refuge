@@ -1,2 +1,0 @@
-/*! Built with http://stenciljs.com */
-const{h:s}=window.App;class t{constructor(){this.icon="close",this.classes="icon"}render(){return s("img",{class:this.classes,src:"assets/icons/"+this.icon+".svg"})}static get is(){return"ref-icon"}static get properties(){return{classes:{type:String,attr:"classes"},icon:{type:String,attr:"icon"}}}static get style(){return".icon{height:24px;width:24px}.marker{height:42px;width:22px}.padded{margin-right:12px}.inactive{opacity:.45}"}}export{t as RefIcon};

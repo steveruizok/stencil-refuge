@@ -1,0 +1,21 @@
+ref-icon {
+}
+
+.icon {
+}
+
+.marker {
+  margin-top: 14px;
+}
+
+.padded {
+  margin-right: 12px;
+}
+
+.inactive {
+  opacity: 0.45;
+}
+
+.link {
+  cursor: pointer;
+}

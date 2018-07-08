@@ -1,0 +1,38 @@
+app-root {
+  display: grid;
+  grid-auto-columns: 100vw;
+  grid-template-rows: 60px 100% auto auto;
+  z-index: 10;
+  height: 100vh;
+  overflow-y: none;
+}
+/* 
+.location-container {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 8px auto 8px;
+  width: 100%;
+  bottom: 10%;
+  z-index: 50;
+}
+
+.location-search {
+  grid-column: 2;
+}
+
+.copyright,
+.copyright a {
+  display: block;
+  grid-column: 2;
+  width: 100%;
+  bottom: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--blue-med);
+  z-index: 50;
+}
+
+.loading {
+  -webkit-filter: brightness(0.85);
+  filter: brightness(0.95);
+} */

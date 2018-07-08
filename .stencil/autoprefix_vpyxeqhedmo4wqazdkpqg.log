@@ -1,0 +1,24 @@
+ref-icon {
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+}
+
+.marker {
+  height: 42px;
+  width: 22px;
+}
+
+.padded {
+  margin-right: 12px;
+}
+
+.inactive {
+  opacity: 0.45;
+}
+
+.link {
+  cursor: pointer;
+}

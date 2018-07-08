@@ -279,8 +279,6 @@ export class AppRoot {
 
       <refuge-map id="refuge-map" />,
 
-      <refuge-filter />,
-
       <refuge-results results={this.results} />,
 
       <refuge-predictions />,

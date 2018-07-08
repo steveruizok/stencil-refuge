@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "stencil build --prerender",
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "dev": "stencil build --dev --watch --serve",
     "serve": "stencil-dev-server",
     "start": "npm run dev",
     "test": "jest",
@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "@google/maps": "^0.4.6",
-    "@stencil/core": "^0.9.11",
+    "@stencil/core": "^0.10.0-11",
     "@stencil/redux": "0.0.4",
     "@stencil/router": "^0.2.2",
-    "@types/googlemaps": "^3.30.10",
+    "@types/googlemaps": "^3.30.11",
     "classnames": "^2.2.6",
     "geolocation-marker": "^2.0.5",
     "jss": "^9.8.7",

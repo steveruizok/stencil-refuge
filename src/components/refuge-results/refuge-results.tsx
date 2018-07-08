@@ -96,13 +96,14 @@ export class RefugeResults {
 
     let resultsClass = classNames({
       "refuge-results": true,
-      open: this.results.length > 0
+      "results-open": this.results.length > 0
     });
 
-    return (
+    return [
+      <refuge-filter />,
       <div id="results-scroll" class={resultsClass}>
         {this.entries}
       </div>
-    );
+    ];
   }
 }

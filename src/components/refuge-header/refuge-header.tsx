@@ -29,9 +29,9 @@ export class RefugeHeader {
   setLoading: Action;
   resetAll: Action;
 
-  hasText;
-  input;
+  query: string = "";
   service;
+  input: HTMLInputElement;
   predictionsContainer;
 
   componentWillLoad() {}
@@ -60,8 +60,6 @@ export class RefugeHeader {
 
   getPredictions = event => {
     let value = event.target.value;
-    this.hasText = this.input.value.length > 0;
-
     if (value === undefined || value.length === 0) {
       this.clearPredictions();
       return;
@@ -98,28 +96,27 @@ export class RefugeHeader {
   // handle search
 
   searchByPrediction = prediction => {
-    this.input.value = prediction.structured_formatting.main_text;
+    this.query = prediction.structured_formatting.main_text;
+    this.input.value = this.query;
     this.handleSearch(prediction);
     this.clearPredictions();
   };
 
   searchByLocation = () => {
-    this.input.value = "My Location";
+    this.query = "My Location";
+    this.input.value = this.query;
     this.handleSearch();
     this.clearPredictions();
   };
 
   handleRightClick = () => {
-    if (this.markers.length > 0) {
-      // clear input content
-      this.input.value = null;
-      this.resetAll();
+    if (this.predictions.length > 0) {
+      this.input.value = this.query;
+      this.clearPredictions();
     } else if (this.input.value.length > 0) {
-      // clear map
       this.input.value = null;
       this.resetAll();
     } else {
-      // search by location
       this.searchByLocation();
     }
   };
@@ -162,7 +159,7 @@ export class RefugeHeader {
           class="search-input"
           placeholder="Search..."
           ref={el => {
-            this.input = el;
+            this.input = el as HTMLInputElement;
           }}
           // onBlur={() => {
           //   setTimeout(this.clearPredictions, 150);
@@ -175,7 +172,6 @@ export class RefugeHeader {
         />
         <div class="header-icon left-icon">{leftIcon}</div>
 
-        {/* <span class="header-icon left-icon material-icons">{leftIcon}</span> */}
         <span class={rightIconClasses} onClick={this.handleRightClick}>
           {rightIcon}
         </span>

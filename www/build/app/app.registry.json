@@ -2,42 +2,42 @@
   "namespace": "App",
   "fsNamespace": "app",
   "loader": "../app.js",
+  "corePolyfilled": "es5-build-disabled.js",
   "global": "app.global.js",
-  "core": "app.onlaozns.js",
-  "corePolyfilled": "app.sidvzhvv.js",
+  "core": "app.core.js",
   "components": {
     "app-root": {
-      "$": "mvgjf5fq"
+      "$": "app-root"
     },
     "ref-icon": {
-      "$": "jkekijgd"
+      "$": "ref-icon"
     },
     "ref-spinner": {
-      "$": "9gttx4rp"
+      "$": "ref-spinner"
     },
     "refuge-detail": {
-      "$": "mvgjf5fq"
+      "$": "app-root"
     },
     "refuge-filter": {
-      "$": "mvgjf5fq"
+      "$": "app-root"
     },
     "refuge-header": {
-      "$": "9gttx4rp"
+      "$": "ref-spinner"
     },
     "refuge-map": {
-      "$": "mvgjf5fq"
+      "$": "app-root"
     },
     "refuge-prediction": {
-      "$": "9gttx4rp"
+      "$": "ref-spinner"
     },
     "refuge-predictions": {
-      "$": "mvgjf5fq"
+      "$": "app-root"
     },
     "refuge-result": {
-      "$": "mvgjf5fq"
+      "$": "app-root"
     },
     "refuge-results": {
-      "$": "mvgjf5fq"
+      "$": "app-root"
     }
   }
 }
