@@ -6,6 +6,10 @@ import { Component } from "@stencil/core";
 })
 export class RefugeMap {
   render() {
-    return <div id="refuge-map" />;
+    return (
+      <div id="refuge-map">
+        <slot />
+      </div>
+    );
   }
 }

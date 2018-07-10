@@ -1,0 +1,21 @@
+refuge-results {
+  grid-row: 3;
+  width: 100%;
+  background: var(--white);
+  overflow-y: scroll;
+  height: 40vh;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: none;
+  transform: none;
+}
+
+.results-hidden {
+  height: 0vh;
+}
+
+.refuge-results {
+  position: relative;
+}
+
+.results-open {
+}

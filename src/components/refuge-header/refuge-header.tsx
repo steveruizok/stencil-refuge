@@ -165,6 +165,7 @@ export class RefugeHeader {
           //   setTimeout(this.clearPredictions, 150);
           // }}
           onInput={this.getPredictions}
+          disabled={this.loading}
           onFocus={event => {
             this.input.select();
             this.getPredictions(event);

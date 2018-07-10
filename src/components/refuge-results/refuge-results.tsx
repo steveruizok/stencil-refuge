@@ -95,8 +95,7 @@ export class RefugeResults {
     this.entries = this.getEntries();
 
     let resultsClass = classNames({
-      "refuge-results": true,
-      "results-open": this.results.length > 0
+      "refuge-results": true
     });
 
     return [

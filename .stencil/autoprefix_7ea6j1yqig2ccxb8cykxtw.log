@@ -1,0 +1,57 @@
+app-root {
+  display: grid;
+  grid-auto-columns: 100vw;
+  grid-template-rows: 60px auto -webkit-min-content;
+  grid-template-rows: 60px auto min-content;
+  z-index: 10;
+  height: 100%;
+}
+
+.refuge-overlay {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  bottom: 100px;
+  width: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.refuge-button {
+  width: 100%;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+/* 
+.location-container {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 8px auto 8px;
+  width: 100%;
+  bottom: 10%;
+  z-index: 50;
+}
+
+.location-search {
+  grid-column: 2;
+}
+
+.copyright,
+.copyright a {
+  display: block;
+  grid-column: 2;
+  width: 100%;
+  bottom: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--blue-med);
+  z-index: 50;
+}
+
+.loading {
+  -webkit-filter: brightness(0.85);
+  filter: brightness(0.95);
+} */

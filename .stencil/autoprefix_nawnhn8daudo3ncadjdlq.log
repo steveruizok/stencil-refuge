@@ -1,0 +1,32 @@
+refuge-results {
+  grid-row: 3;
+  width: 100%;
+  background: var(--white);
+  overflow-y: scroll;
+  -webkit-transform: none;
+  transform: none;
+  height: 40vh;
+  -webkit-overflow-scrolling: touch;
+}
+
+.results-hidden {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+.refuge-results {
+  position: relative;
+  -webkit-transition: -webkit-transform 0.15s;
+  transition: -webkit-transform 0.15s;
+  transition: transform 0.15s;
+  transition: transform 0.15s, -webkit-transform 0.15s;
+}
+
+.results-open {
+  -webkit-transition: -webkit-transform 0.25s;
+  transition: -webkit-transform 0.25s;
+  transition: transform 0.25s;
+  transition: transform 0.25s, -webkit-transform 0.25s;
+  -webkit-transform: none;
+  transform: none;
+}

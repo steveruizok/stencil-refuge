@@ -1,6 +1,7 @@
-import { Component, Prop, State } from "@stencil/core";
+import { Component, Prop, State, Element } from "@stencil/core";
 import { Store, Action } from "@stencil/redux";
 import { configureStore } from "../store";
+import classnames from "classnames";
 import {
   setResults,
   setMarkers,
@@ -19,6 +20,7 @@ declare var google: any;
   styleUrl: "app-root.css"
 })
 export class AppRoot {
+  @Element() element: HTMLElement;
   @Prop({ context: "store" })
   store: Store;
 
@@ -63,10 +65,10 @@ export class AppRoot {
     this.store.setStore(configureStore(undefined));
     this.store.mapStateToProps(this, state => {
       const {
-        app: { filter, results, markers, location, focused, selected }
+        app: { filter, results, markers, location, focused, selected, loading }
       } = state;
 
-      return { filter, results, markers, location, focused, selected };
+      return { filter, results, markers, location, focused, selected, loading };
     });
 
     this.store.mapDispatchToProps(this, {
@@ -83,7 +85,6 @@ export class AppRoot {
     await this.loadScript();
 
     this.script.addEventListener("load", async () => {
-      console.log("ok...");
       this.map = new google.maps.Map(document.getElementById("refuge-map"), {
         center: { lat: -33.8688, lng: 151.2195 },
         zoom: 13,
@@ -95,7 +96,6 @@ export class AppRoot {
       this.autocomplete = new google.maps.places.AutocompleteService();
 
       if ("geolocation" in navigator) {
-        console.log("ok...");
         navigator.geolocation.getCurrentPosition(this.setUserPosition, () => {
           this.setLoading(false);
         });
@@ -129,7 +129,7 @@ export class AppRoot {
     this.updateUserPosition();
 
     // testing
-    this.searchByUserLocation();
+    // this.searchByUserLocation();
   };
 
   updateUserPosition = () => {
@@ -211,15 +211,19 @@ export class AppRoot {
         if (this.selected === result) {
           this.setSelectedResult(undefined);
           return;
-        }
-
-        if (this.focused === result) {
+        } else if (this.selected) {
+          this.setFocusedResult(result);
+          this.setSelectedResult(result);
+          return;
+        } else if (this.focused === result) {
           this.setSelectedResult(result);
           return;
         }
 
         this.setFocusedResult(result);
       });
+
+      result.marker = marker;
 
       return marker;
     });
@@ -235,12 +239,14 @@ export class AppRoot {
     });
 
     this.map.fitBounds(bounds);
-    this.setLoading(false);
+    window.setTimeout(() => {
+      this.setLoading(false);
+    }, 650);
   };
 
   // Update which markers are visible
   updateMarkers = () => {
-    this.results.forEach((res, i) => {
+    this.results.forEach(res => {
       let ok = true;
 
       for (let key in this.filter) {
@@ -253,10 +259,11 @@ export class AppRoot {
 
       if (res === this.focused) {
         image = "marker-focused-a";
+        // this.map.panTo(res.marker.getPosition());
       }
 
-      this.markers[i].setIcon(`/assets/icons/${image}.svg`);
-      this.markers[i].setVisible(ok);
+      res.marker.setIcon(`/assets/icons/${image}.svg`);
+      res.marker.setVisible(ok);
     });
   };
 
@@ -271,32 +278,53 @@ export class AppRoot {
   render() {
     this.updateMarkers();
 
-    return [
-      <refuge-header
-        handleSearch={this.searchByPrediction}
-        autocomplete={this.autocomplete}
-      />,
+    // wrapper
 
-      <refuge-map id="refuge-map" />,
+    let wrapper_classes = classnames({
+      "refuge-wrapper": true,
+      "has-results": this.results.length <= 0
+    });
+    // results
 
-      <refuge-results results={this.results} />,
+    let results_classes = classnames({
+      "results-hidden": this.results.length <= 0
+    });
 
-      <refuge-predictions />,
+    // overlay
 
-      <refuge-detail />
+    let overlay_classes = classnames({
+      "refuge-overlay": true,
+      "overlay-hidden": this.results.length > 0
+    });
 
-      // <div class={overlayClasses}>
-      //   <button class={buttonClasses} onClick={this.searchByUserLocation}>
-      //     find a restroom near you
-      //     <span class="inline-icon material-icons">my_location</span>
-      //   </button>
-      //   <p class="copyright">
-      //     <a class="shy-link" href="http://twitter.com/steveruizok">
-      //       @steveruizok
-      //     </a>{" "}
-      //     2018
-      //   </p>
-      // </div>
-    ];
+    let button_content: any;
+
+    if (this.loading) {
+      button_content = <ref-spinner class="button-spinner" />;
+    } else {
+      button_content = "find a nearby restroom";
+    }
+
+    return (
+      <div class={wrapper_classes}>
+        <refuge-header
+          handleSearch={this.searchByPrediction}
+          autocomplete={this.autocomplete}
+        />
+        <refuge-map id="refuge-map" />
+        <refuge-results class={results_classes} results={this.results} />
+        <refuge-predictions />
+        <refuge-detail />
+        <div class={overlay_classes}>
+          <button
+            class="refuge-button"
+            disabled={this.loading}
+            onClick={this.searchByUserLocation}
+          >
+            {button_content}
+          </button>
+        </div>
+      </div>
+    );
   }
 }

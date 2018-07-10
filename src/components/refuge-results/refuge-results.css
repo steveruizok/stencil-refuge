@@ -2,19 +2,19 @@ refuge-results {
   grid-row: 3;
   width: 100%;
   background: var(--white);
-  transition: height 0.25s;
-  /* max-height: 50vh; */
   overflow-y: scroll;
+  height: 40vh;
   -webkit-overflow-scrolling: touch;
+  transform: none;
+}
+
+.results-hidden {
+  height: 0vh;
 }
 
 .refuge-results {
   position: relative;
-  transition: height 0.15s;
-  height: 0px;
 }
 
 .results-open {
-  transition: height 0.25s;
-  height: 40vh;
 }

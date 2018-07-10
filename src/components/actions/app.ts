@@ -121,6 +121,7 @@ export const setSelectedResult = (selected: any) => async (
 ) => {
   return dispatch({
     type: TypeKeys.SET_SELECTED_RESULT,
+    focused: selected,
     selected: selected
   });
 };
