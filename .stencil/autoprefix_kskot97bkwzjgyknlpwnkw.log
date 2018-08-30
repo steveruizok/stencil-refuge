@@ -4,6 +4,7 @@ app-root {
 .refuge-wrapper {
   display: grid;
   width: 100%;
+  grid-template-rows: 60px auto -webkit-min-content;
   grid-template-rows: 60px auto min-content;
   z-index: 10;
   height: 100%;
@@ -11,20 +12,20 @@ app-root {
 
 .refuge-overlay {
   position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   bottom: 40px;
-  width: auto;
+  width: 100%;
 }
 
 .refuge-button {
-  display: block;
   margin: 0 auto;
   width: auto;
 }
 
 @media all and (max-width: 400px) {
   .refuge-button {
-    width: 100%;
     margin: 0 8px;
   }
 }

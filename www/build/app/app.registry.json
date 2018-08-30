@@ -2,42 +2,42 @@
   "namespace": "App",
   "fsNamespace": "app",
   "loader": "../app.js",
+  "corePolyfilled": "es5-build-disabled.js",
   "global": "app.global.js",
-  "core": "app.8lbgxbgb.js",
-  "corePolyfilled": "app.v752re4p.js",
+  "core": "app.core.js",
   "components": {
     "app-root": {
-      "$": "f4g4ulyr"
+      "$": "app-root"
     },
     "ref-icon": {
-      "$": "eqtzragg"
+      "$": "ref-icon"
     },
     "ref-spinner": {
-      "$": "bd9mg1am"
+      "$": "ref-spinner"
     },
     "refuge-detail": {
-      "$": "f4g4ulyr"
+      "$": "app-root"
     },
     "refuge-filter": {
-      "$": "f4g4ulyr"
+      "$": "app-root"
     },
     "refuge-header": {
-      "$": "zksuc2au"
+      "$": "refuge-header"
     },
     "refuge-map": {
-      "$": "f4g4ulyr"
+      "$": "app-root"
     },
     "refuge-prediction": {
-      "$": "zksuc2au"
+      "$": "refuge-header"
     },
     "refuge-predictions": {
-      "$": "f4g4ulyr"
+      "$": "app-root"
     },
     "refuge-result": {
-      "$": "f4g4ulyr"
+      "$": "app-root"
     },
     "refuge-results": {
-      "$": "f4g4ulyr"
+      "$": "app-root"
     }
   }
 }

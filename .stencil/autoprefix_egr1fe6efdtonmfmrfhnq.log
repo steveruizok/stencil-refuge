@@ -3,7 +3,8 @@ app-root {
 
 .refuge-wrapper {
   display: grid;
-  width: 100%;
+  grid-auto-columns: 100vw;
+  grid-template-rows: 60px auto -webkit-min-content;
   grid-template-rows: 60px auto min-content;
   z-index: 10;
   height: 100%;
@@ -11,13 +12,14 @@ app-root {
 
 .refuge-overlay {
   position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   bottom: 40px;
-  width: auto;
+  width: 100%;
 }
 
 .refuge-button {
-  display: block;
   margin: 0 auto;
   width: auto;
 }
@@ -29,7 +31,7 @@ app-root {
   }
 }
 
-@media all and (min-width: 401px) {
+@media all and (min-width: 401) {
   .refuge-button {
     width: 400px;
     margin: 0 auto;
@@ -42,11 +44,4 @@ app-root {
 
 .overlay-hidden {
   visibility: hidden;
-}
-
-@media all and (min-width: 800px) {
-  .refuge-wrapper {
-    width: 800px;
-    margin: 0 auto;
-  }
 }

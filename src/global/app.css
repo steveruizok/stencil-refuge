@@ -65,11 +65,7 @@ body {
 }
 
 button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: white;
-  margin: 8px;
   border: none;
   font-size: 13px;
   font-weight: 700;

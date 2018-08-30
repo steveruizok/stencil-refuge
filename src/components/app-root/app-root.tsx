@@ -237,7 +237,7 @@ export class AppRoot {
     this.markers.forEach(marker => {
       bounds.extend(marker.getPosition());
     });
-
+		
     this.map.fitBounds(bounds);
     window.setTimeout(() => {
       this.setLoading(false);
